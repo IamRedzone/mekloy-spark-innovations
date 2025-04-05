@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -56,7 +55,7 @@ const projects = [
     id: 6,
     title: 'Yenagoa Commercial District Lighting',
     category: 'Domestic',
-    description: 'Comprehensive street and commercial lighting project for Yenagoa's business district, enhancing safety and business operations after dark.',
+    description: "Comprehensive street and commercial lighting project for Yenagoa's business district, enhancing safety and business operations after dark.",
     image: 'https://images.unsplash.com/photo-1573167507387-6b4b98cb7c13?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
     year: 2021,
   },
@@ -69,7 +68,6 @@ const Projects = () => {
   const filterCategories = ['All', 'Industrial', 'Domestic', 'Solar'];
   
   useEffect(() => {
-    // GSAP animations
     gsap.from('.page-title', {
       y: 30,
       opacity: 0,
@@ -220,7 +218,7 @@ const Projects = () => {
                   </div>
                 </div>
                 
-                {/* Step 3 */}
+                {/* Steps 3-6 */}
                 <div className="relative flex flex-col md:flex-row items-center">
                   <div className="md:w-1/2 md:pr-12 text-center md:text-right">
                     <h3 className="text-2xl font-bold text-mekloy-blue mb-3">Material Procurement</h3>
@@ -233,7 +231,6 @@ const Projects = () => {
                   <div className="md:w-1/2 md:pl-12"></div>
                 </div>
                 
-                {/* Step 4 */}
                 <div className="relative flex flex-col md:flex-row items-center">
                   <div className="md:w-1/2 md:pr-12"></div>
                   <div className="w-12 h-12 rounded-full bg-mekloy-blue text-white flex items-center justify-center text-xl font-bold my-6 md:my-0 z-10">4</div>
@@ -246,7 +243,6 @@ const Projects = () => {
                   </div>
                 </div>
                 
-                {/* Step 5 */}
                 <div className="relative flex flex-col md:flex-row items-center">
                   <div className="md:w-1/2 md:pr-12 text-center md:text-right">
                     <h3 className="text-2xl font-bold text-mekloy-blue mb-3">Testing & Verification</h3>
@@ -259,7 +255,6 @@ const Projects = () => {
                   <div className="md:w-1/2 md:pl-12"></div>
                 </div>
                 
-                {/* Step 6 */}
                 <div className="relative flex flex-col md:flex-row items-center">
                   <div className="md:w-1/2 md:pr-12"></div>
                   <div className="w-12 h-12 rounded-full bg-mekloy-blue text-white flex items-center justify-center text-xl font-bold my-6 md:my-0 z-10">6</div>
