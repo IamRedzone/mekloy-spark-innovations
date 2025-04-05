@@ -1,11 +1,12 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 186 100% 96%;
+    --foreground: 222 84% 4.9%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -13,10 +14,10 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 227 69% 33%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
+    --secondary: 54 96% 77%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
@@ -35,19 +36,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -96,6 +90,51 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-mekloy-light-blue text-foreground;
+    scroll-behavior: smooth;
+  }
+
+  /* Hide the honeypot field for bot protection */
+  .honeypot {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-mekloy-blue mb-4;
+  }
+  
+  .section-subtitle {
+    @apply text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto;
+  }
+
+  .container-padding {
+    @apply px-6 lg:px-10 py-16 md:py-24;
+  }
+
+  .btn-primary {
+    @apply bg-mekloy-blue text-white hover:bg-blue-800 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply bg-mekloy-yellow text-mekloy-blue hover:bg-amber-200 transition-colors;
+  }
+
+  .section {
+    @apply py-12 md:py-24;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+}
+
+@layer utilities {
+  .client-logo {
+    @apply grayscale opacity-70 transition-all duration-300 hover:grayscale-0 hover:opacity-100;
   }
 }
