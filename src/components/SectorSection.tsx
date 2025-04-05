@@ -14,11 +14,11 @@ const sectors = [
   },
   {
     id: 2,
-    title: 'Domestic',
-    description: 'Enhancing homes with quality electrical products that combine safety, functionality, and aesthetic appeal.',
-    icon: '🏠',
-    color: 'bg-green-100',
-    borderColor: 'border-green-300',
+    title: 'Decor',
+    description: 'Enhancing homes and businesses with aesthetic lighting and electrical installations that combine functionality and style.',
+    icon: '✨',
+    color: 'bg-purple-100',
+    borderColor: 'border-purple-300',
   },
   {
     id: 3,

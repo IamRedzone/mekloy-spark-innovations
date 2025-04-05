@@ -37,7 +37,7 @@ const Navbar = () => {
   }, []);
 
   const navClassName = `fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-    scrolled ? 'bg-white/90 backdrop-blur-md shadow-md py-2' : 'bg-transparent py-4'
+    scrolled ? 'bg-white/90 backdrop-blur-md shadow-md py-2' : 'bg-mekloy-blue/80 backdrop-blur-md py-4'
   }`;
 
   const scrollToSection = useCallback((sectionId: string) => {
@@ -60,11 +60,15 @@ const Navbar = () => {
     }
   };
 
+  const linkClassName = scrolled 
+    ? "text-gray-700 hover:text-mekloy-blue font-medium transition-colors" 
+    : "text-white hover:text-mekloy-yellow font-medium transition-colors";
+
   return (
     <nav className={navClassName}>
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center z-50">
-          <span className="text-mekloy-blue font-nexa font-bold text-2xl">MEKLOY</span>
+          <span className={scrolled ? "text-mekloy-blue font-nexa font-bold text-2xl" : "text-white font-nexa font-bold text-2xl"}>MEKLOY</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -73,7 +77,7 @@ const Navbar = () => {
             <Link
               key={link.name}
               to={link.path}
-              className="text-gray-700 hover:text-mekloy-blue font-medium transition-colors"
+              className={linkClassName}
               onClick={() => handleNavLinkClick(link.path)}
             >
               {link.name}
@@ -84,7 +88,9 @@ const Navbar = () => {
         {/* Call Button */}
         <a 
           href="tel:+2348060000000" 
-          className="hidden md:flex items-center gap-2 text-mekloy-blue hover:text-blue-700 font-medium"
+          className={scrolled 
+            ? "hidden md:flex items-center gap-2 text-mekloy-blue hover:text-blue-700 font-medium" 
+            : "hidden md:flex items-center gap-2 text-white hover:text-mekloy-yellow font-medium"}
         >
           <Phone size={18} />
           <span>Call Now</span>
@@ -92,7 +98,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-gray-700 z-50"
+          className={scrolled ? "md:hidden text-gray-700 z-50" : "md:hidden text-white z-50"}
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -102,13 +108,13 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-md fixed inset-0 py-20 px-6 flex flex-col items-center justify-center z-40 animate-fade-in">
+        <div className="md:hidden bg-mekloy-blue/95 backdrop-blur-md fixed inset-0 py-20 px-6 flex flex-col items-center justify-center z-40 animate-fade-in">
           <div className="flex flex-col space-y-6 items-center">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className="text-gray-700 hover:text-mekloy-blue py-2 font-medium transition-colors text-xl"
+                className="text-white hover:text-mekloy-yellow py-2 font-medium transition-colors text-xl"
                 onClick={() => handleNavLinkClick(link.path)}
               >
                 {link.name}
@@ -116,7 +122,7 @@ const Navbar = () => {
             ))}
             <a 
               href="tel:+2348060000000" 
-              className="flex items-center gap-2 text-mekloy-blue hover:text-blue-700 font-medium py-2 mt-4"
+              className="flex items-center gap-2 text-white hover:text-mekloy-yellow font-medium py-2 mt-4"
             >
               <Phone size={18} />
               <span>Call Now</span>
