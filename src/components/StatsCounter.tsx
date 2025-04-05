@@ -39,12 +39,12 @@ const Stat = ({ value, label, suffix = '+', duration = 2 }: StatProps) => {
   }, [inView, value, duration]);
 
   return (
-    <div ref={ref} className="text-center">
-      <h3 className="text-4xl md:text-5xl font-bold text-mekloy-blue">
+    <div ref={ref} className="text-center bg-white/20 backdrop-blur-sm p-6 rounded-lg hover:bg-white/30 transition-all duration-300 transform hover:-translate-y-1">
+      <h3 className="text-4xl md:text-5xl font-bold text-white">
         {count}
         <span className="text-mekloy-yellow">{suffix}</span>
       </h3>
-      <p className="text-lg text-gray-600 mt-2">{label}</p>
+      <p className="text-lg text-gray-200 mt-2 font-poppins">{label}</p>
     </div>
   );
 };
@@ -67,9 +67,15 @@ const StatsCounter = () => {
   }, []);
 
   return (
-    <section className="py-24 bg-white" ref={sectionRef}>
+    <section 
+      className="py-24 bg-cover bg-center bg-fixed relative" 
+      style={{ 
+        backgroundImage: "linear-gradient(to right, rgba(30, 58, 138, 0.9), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=2000&auto=format&fit=crop&q=80')" 
+      }}
+      ref={sectionRef}
+    >
       <div className="container mx-auto px-6">
-        <div className="max-w-5xl mx-auto bg-gradient-to-r from-mekloy-blue to-blue-700 rounded-lg shadow-xl p-12">
+        <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Stat value={200} label="Projects Completed" />
             <Stat value={15} label="Years Experience" />

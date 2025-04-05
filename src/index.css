@@ -89,9 +89,16 @@
     @apply border-border;
   }
 
-  body {
-    @apply bg-mekloy-light-blue text-foreground;
+  html {
     scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-mekloy-light-blue text-foreground font-poppins;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-nexa font-bold;
   }
 
   /* Hide the honeypot field for bot protection */
@@ -105,11 +112,11 @@
 
 @layer components {
   .section-title {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold text-mekloy-blue mb-4;
+    @apply text-3xl md:text-4xl lg:text-5xl font-nexa font-bold text-mekloy-blue mb-4;
   }
   
   .section-subtitle {
-    @apply text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto;
+    @apply text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto font-poppins;
   }
 
   .container-padding {
@@ -131,10 +138,22 @@
   .card-hover {
     @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
+  
+  .overlay-bg {
+    @apply after:absolute after:inset-0 after:bg-black/40 after:z-10 relative;
+  }
+  
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm shadow-lg rounded-lg border border-white/20;
+  }
 }
 
 @layer utilities {
   .client-logo {
     @apply grayscale opacity-70 transition-all duration-300 hover:grayscale-0 hover:opacity-100;
+  }
+  
+  .bg-pattern {
+    @apply bg-no-repeat bg-cover bg-center bg-fixed;
   }
 }

@@ -1,8 +1,12 @@
 
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Phone } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+
+gsap.registerPlugin(ScrollToPlugin);
 
 const NAV_LINKS = [
   { name: 'Home', path: '/' },
@@ -17,6 +21,7 @@ const NAV_LINKS = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,18 +37,34 @@ const Navbar = () => {
   }, []);
 
   const navClassName = `fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-    scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
+    scrolled ? 'bg-white/90 backdrop-blur-md shadow-md py-2' : 'bg-transparent py-4'
   }`;
 
-  const handleNavLinkClick = () => {
+  const scrollToSection = useCallback((sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      gsap.to(window, {
+        duration: 1,
+        scrollTo: { y: section, offsetY: 80 },
+        ease: "power3.inOut"
+      });
+    }
+  }, []);
+
+  const handleNavLinkClick = (path: string) => {
     setIsOpen(false);
+    
+    if (path.includes('#') && location.pathname === '/') {
+      const sectionId = path.split('#')[1];
+      scrollToSection(sectionId);
+    }
   };
 
   return (
     <nav className={navClassName}>
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center">
-          <span className="text-mekloy-blue font-bold text-2xl">MEKLOY</span>
+        <Link to="/" className="flex items-center z-50">
+          <span className="text-mekloy-blue font-nexa font-bold text-2xl">MEKLOY</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -53,7 +74,7 @@ const Navbar = () => {
               key={link.name}
               to={link.path}
               className="text-gray-700 hover:text-mekloy-blue font-medium transition-colors"
-              onClick={handleNavLinkClick}
+              onClick={() => handleNavLinkClick(link.path)}
             >
               {link.name}
             </Link>
@@ -71,7 +92,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-gray-700"
+          className="md:hidden text-gray-700 z-50"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -81,21 +102,21 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden bg-white w-full py-4 shadow-lg animate-fade-in">
-          <div className="container mx-auto px-6 flex flex-col space-y-4">
+        <div className="md:hidden bg-white/95 backdrop-blur-md fixed inset-0 py-20 px-6 flex flex-col items-center justify-center z-40 animate-fade-in">
+          <div className="flex flex-col space-y-6 items-center">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className="text-gray-700 hover:text-mekloy-blue py-2 font-medium transition-colors"
-                onClick={handleNavLinkClick}
+                className="text-gray-700 hover:text-mekloy-blue py-2 font-medium transition-colors text-xl"
+                onClick={() => handleNavLinkClick(link.path)}
               >
                 {link.name}
               </Link>
             ))}
             <a 
               href="tel:+2348060000000" 
-              className="flex items-center gap-2 text-mekloy-blue hover:text-blue-700 font-medium py-2"
+              className="flex items-center gap-2 text-mekloy-blue hover:text-blue-700 font-medium py-2 mt-4"
             >
               <Phone size={18} />
               <span>Call Now</span>

@@ -19,6 +19,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				nexa: ['Nexa', 'sans-serif'],
+				poppins: ['Poppins', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -116,6 +120,13 @@ export default {
 				'slide-left': 'slide-left 20s linear infinite',
 				'count-up': 'count-up 2s forwards',
 				'fade-in': 'fade-in 0.5s ease-out'
+			},
+			backgroundImage: {
+				'hero-pattern': "url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=2000&auto=format&fit=crop&q=80')",
+				'vision-pattern': "url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=2000&auto=format&fit=crop&q=80')",
+				'logistics-pattern': "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=2000&auto=format&fit=crop&q=80')",
+				'projects-pattern': "url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=2000&auto=format&fit=crop&q=80')",
+				'contact-pattern': "url('https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=2000&auto=format&fit=crop&q=80')",
 			}
 		}
 	},
