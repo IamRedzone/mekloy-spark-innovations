@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Clock, DollarSign, Calendar } from 'lucide-react';
@@ -27,9 +27,21 @@ interface ProjectModalProps {
 }
 
 const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [images, setImages] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (project) {
+      setImages([project.image, ...(project.additionalImages || [])]);
+      setCurrentImageIndex(0); // Reset to first image when modal opens
+    }
+  }, [project, isOpen]);
+
   if (!project) return null;
 
-  const images = [project.image, ...(project.additionalImages || [])];
+  const goToImage = (index: number) => {
+    setCurrentImageIndex(index);
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -43,23 +55,53 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
 
         {/* Image Carousel */}
         <div className="relative overflow-hidden rounded-lg mb-6 h-64 md:h-80">
-          <div className="flex transition-transform duration-500 h-full">
-            {images.map((img, index) => (
+          {images.map((img, index) => (
+            <div 
+              key={index} 
+              className={`absolute inset-0 transition-opacity duration-500 ${
+                index === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              }`}
+            >
               <img
-                key={index}
                 src={img}
                 alt={`${project.title} - image ${index + 1}`}
-                className="w-full h-full object-cover flex-shrink-0"
+                className="w-full h-full object-cover"
               />
-            ))}
-          </div>
+            </div>
+          ))}
+          
+          {/* Navigation arrows */}
           {images.length > 1 && (
-            <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1">
+            <>
+              <button 
+                onClick={() => goToImage((currentImageIndex - 1 + images.length) % images.length)}
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/30 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-black/50 transition-colors"
+                aria-label="Previous image"
+              >
+                &#10094;
+              </button>
+              <button 
+                onClick={() => goToImage((currentImageIndex + 1) % images.length)}
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/30 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-black/50 transition-colors"
+                aria-label="Next image"
+              >
+                &#10095;
+              </button>
+            </>
+          )}
+          
+          {/* Indicator dots */}
+          {images.length > 1 && (
+            <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1 z-20">
               {images.map((_, index) => (
-                <span
+                <button
                   key={index}
-                  className="w-2 h-2 rounded-full bg-white opacity-60"
-                ></span>
+                  onClick={() => goToImage(index)}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    index === currentImageIndex ? 'bg-white' : 'bg-white/40 hover:bg-white/60'
+                  }`}
+                  aria-label={`Go to image ${index + 1}`}
+                ></button>
               ))}
             </div>
           )}
