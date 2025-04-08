@@ -4,6 +4,13 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Clock, DollarSign, Calendar } from 'lucide-react';
 import { Button } from './ui/button';
+import { 
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious
+} from "@/components/ui/carousel";
 
 export interface ProjectDetails {
   id: number;
@@ -27,21 +34,15 @@ interface ProjectModalProps {
 }
 
 const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [images, setImages] = useState<string[]>([]);
 
   useEffect(() => {
     if (project) {
       setImages([project.image, ...(project.additionalImages || [])]);
-      setCurrentImageIndex(0); // Reset to first image when modal opens
     }
-  }, [project, isOpen]);
+  }, [project]);
 
   if (!project) return null;
-
-  const goToImage = (index: number) => {
-    setCurrentImageIndex(index);
-  };
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -53,58 +54,29 @@ const ProjectModal = ({ project, isOpen, onClose }: ProjectModalProps) => {
           </DialogDescription>
         </DialogHeader>
 
-        {/* Image Carousel */}
-        <div className="relative overflow-hidden rounded-lg mb-6 h-64 md:h-80">
-          {images.map((img, index) => (
-            <div 
-              key={index} 
-              className={`absolute inset-0 transition-opacity duration-500 ${
-                index === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-              }`}
-            >
-              <img
-                src={img}
-                alt={`${project.title} - image ${index + 1}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
-          
-          {/* Navigation arrows */}
-          {images.length > 1 && (
-            <>
-              <button 
-                onClick={() => goToImage((currentImageIndex - 1 + images.length) % images.length)}
-                className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/30 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-black/50 transition-colors"
-                aria-label="Previous image"
-              >
-                &#10094;
-              </button>
-              <button 
-                onClick={() => goToImage((currentImageIndex + 1) % images.length)}
-                className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/30 text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-black/50 transition-colors"
-                aria-label="Next image"
-              >
-                &#10095;
-              </button>
-            </>
-          )}
-          
-          {/* Indicator dots */}
-          {images.length > 1 && (
-            <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1 z-20">
-              {images.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToImage(index)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    index === currentImageIndex ? 'bg-white' : 'bg-white/40 hover:bg-white/60'
-                  }`}
-                  aria-label={`Go to image ${index + 1}`}
-                ></button>
+        {/* Image Carousel using ShadCN UI Carousel */}
+        <div className="mb-6">
+          <Carousel className="w-full">
+            <CarouselContent>
+              {images.map((image, index) => (
+                <CarouselItem key={index}>
+                  <div className="rounded-lg overflow-hidden h-64 md:h-80">
+                    <img 
+                      src={image} 
+                      alt={`${project.title} - image ${index + 1}`} 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </CarouselItem>
               ))}
-            </div>
-          )}
+            </CarouselContent>
+            {images.length > 1 && (
+              <>
+                <CarouselPrevious className="left-2" />
+                <CarouselNext className="right-2" />
+              </>
+            )}
+          </Carousel>
         </div>
 
         {/* Project Info Cards */}
