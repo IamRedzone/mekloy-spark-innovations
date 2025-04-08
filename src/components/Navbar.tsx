@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, Zap } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
@@ -22,6 +22,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,13 +62,14 @@ const Navbar = () => {
   };
 
   const linkClassName = scrolled 
-    ? "text-mekloy-blue hover:text-mekloy-blue/80 font-medium transition-colors" 
-    : "text-white hover:text-mekloy-yellow font-medium transition-colors";
+    ? "text-mekloy-blue hover:text-mekloy-blue/80 font-medium transition-colors relative" 
+    : "text-white hover:text-mekloy-yellow font-medium transition-colors relative";
 
   return (
     <nav className={navClassName}>
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center z-50">
+        <Link to="/" className="flex items-center z-50 group">
+          <Zap className={`mr-1 ${scrolled ? 'text-mekloy-yellow' : 'text-mekloy-yellow'} transition-all duration-300 group-hover:rotate-12`} />
           <span className={scrolled ? "text-mekloy-blue font-nexa font-bold text-2xl" : "text-white font-nexa font-bold text-2xl"}>MEKLOY</span>
         </Link>
 
@@ -79,20 +81,23 @@ const Navbar = () => {
               to={link.path}
               className={linkClassName}
               onClick={() => handleNavLinkClick(link.path)}
+              onMouseEnter={() => setHoveredLink(link.name)}
+              onMouseLeave={() => setHoveredLink(null)}
             >
               {link.name}
+              <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-mekloy-yellow transform origin-left transition-transform duration-300 ${hoveredLink === link.name ? 'scale-x-100' : 'scale-x-0'}`}></span>
             </Link>
           ))}
         </div>
 
-        {/* Call Button */}
+        {/* Call Button - Fixed contrast issues */}
         <a 
           href="tel:+2348060000000" 
           className={scrolled 
-            ? "hidden md:flex items-center gap-2 text-white bg-mekloy-blue px-4 py-2 rounded-md hover:bg-mekloy-blue/90 font-medium transition-colors" 
-            : "hidden md:flex items-center gap-2 text-mekloy-blue bg-white px-4 py-2 rounded-md hover:bg-gray-100 font-medium transition-colors"}
+            ? "hidden md:flex items-center gap-2 text-white bg-mekloy-blue px-4 py-2 rounded-md hover:bg-mekloy-blue/90 font-medium transition-colors transform hover:scale-105" 
+            : "hidden md:flex items-center gap-2 text-mekloy-blue bg-mekloy-yellow px-4 py-2 rounded-md hover:bg-amber-300 font-medium transition-all transform hover:scale-105"}
         >
-          <Phone size={18} />
+          <Phone size={18} className="animate-pulse" />
           <span>Call Now</span>
         </a>
 
@@ -114,17 +119,18 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className="text-white hover:text-mekloy-yellow py-2 font-medium transition-colors text-xl"
+                className="text-white hover:text-mekloy-yellow py-2 font-medium transition-colors text-xl relative group"
                 onClick={() => handleNavLinkClick(link.path)}
               >
                 {link.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-mekloy-yellow transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
             <a 
               href="tel:+2348060000000" 
-              className="flex items-center gap-2 text-mekloy-blue bg-white px-6 py-3 rounded-md hover:bg-gray-100 font-medium mt-4"
+              className="flex items-center gap-2 text-mekloy-blue bg-mekloy-yellow px-6 py-3 rounded-md hover:bg-amber-300 font-medium mt-4 transition-all transform hover:scale-105"
             >
-              <Phone size={18} />
+              <Phone size={18} className="animate-pulse" />
               <span>Call Now</span>
             </a>
           </div>
