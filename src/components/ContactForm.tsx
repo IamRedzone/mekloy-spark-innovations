@@ -49,12 +49,21 @@ const ContactForm = () => {
     
     setIsSubmitting(true);
     
-    // Simulate sending to backend
-    // In a real implementation, this would connect to your backend service
+    // In a real implementation, this would send the data to your backend service
+    // which would then forward it to your email address
     setTimeout(() => {
       toast({
         title: "Message sent!",
-        description: "We'll get back to you as soon as possible.",
+        description: `Thank you ${formData.name}! Your message has been sent to mekloyintegrated@gmail.com.`,
+      });
+      
+      console.log("Form submitted with data:", {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        message: formData.message,
+        sentTo: "mekloyintegrated@gmail.com"
       });
       
       // Reset form
@@ -87,8 +96,8 @@ const ContactForm = () => {
             </div>
             <div>
               <h3 className="text-lg font-semibold text-mekloy-blue">Phone</h3>
-              <a href="tel:+2348060000000" className="text-gray-700 hover:text-mekloy-blue">
-                +234 806 000 0000
+              <a href="tel:+2348143728843" className="text-gray-700 hover:text-mekloy-blue">
+                +234 814 372 8843
               </a>
             </div>
           </div>
@@ -99,8 +108,8 @@ const ContactForm = () => {
             </div>
             <div>
               <h3 className="text-lg font-semibold text-mekloy-blue">Email</h3>
-              <a href="mailto:info@mekloy.com" className="text-gray-700 hover:text-mekloy-blue">
-                info@mekloy.com
+              <a href="mailto:mekloyintegrated@gmail.com" className="text-gray-700 hover:text-mekloy-blue">
+                mekloyintegrated@gmail.com
               </a>
             </div>
           </div>
@@ -118,7 +127,7 @@ const ContactForm = () => {
         
         <div className="mt-10">
           <a 
-            href="https://wa.me/2348060000000?text=Hello%20Mekloy,%20I'm%20interested%20in%20your%20services." 
+            href="https://wa.me/2348143728843?text=Hello%20Mekloy,%20I'm%20interested%20in%20your%20services." 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors"

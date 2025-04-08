@@ -146,6 +146,19 @@
   .glass-card {
     @apply bg-white/80 backdrop-blur-sm shadow-lg rounded-lg border border-white/20;
   }
+  
+  /* Project card animation */
+  .project-card {
+    @apply relative overflow-hidden;
+  }
+  
+  .project-card::before {
+    @apply content-[''] absolute w-full h-1 bg-mekloy-blue top-0 left-0 transform scale-x-0 transition-transform duration-300 origin-left;
+  }
+  
+  .project-card:hover::before {
+    @apply scale-x-100;
+  }
 }
 
 @layer utilities {
@@ -155,5 +168,40 @@
   
   .bg-pattern {
     @apply bg-no-repeat bg-cover bg-center bg-fixed;
+  }
+  
+  /* Electric flash animation */
+  .electric-flash {
+    animation: electricFlash 0.5s ease-out;
+    position: relative;
+  }
+  
+  @keyframes electricFlash {
+    0%, 100% {
+      box-shadow: 0 0 0 rgba(66, 99, 235, 0);
+    }
+    50% {
+      box-shadow: 0 0 20px 5px rgba(66, 99, 235, 0.4);
+    }
+  }
+  
+  /* Lightning bolt overlay */
+  .lightning-bolt::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='0.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='13 2 3 14 12 14 11 22 21 10 12 10 13 2'%3E%3C/polygon%3E%3C/svg%3E");
+    background-size: 120px 120px;
+    background-position: center;
+    opacity: 0;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+  }
+  
+  .lightning-bolt:hover::after {
+    opacity: 0.07;
   }
 }
