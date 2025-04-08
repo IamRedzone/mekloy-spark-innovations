@@ -1,6 +1,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -89,8 +90,8 @@ const ProductsSection = () => {
   }, []);
 
   return (
-    <section id="products" className="section bg-white" ref={sectionRef}>
-      <div className="container mx-auto container-padding">
+    <section id="products" className="section bg-gradient-to-b from-white to-gray-50 py-24" ref={sectionRef}>
+      <div className="container mx-auto px-6">
         <h2 className="section-title text-center">Our Premium Products</h2>
         <p className="section-subtitle text-center">
           Discover our comprehensive range of high-quality electrical products designed for durability, 
@@ -102,19 +103,27 @@ const ProductsSection = () => {
           ref={cardsRef}
         >
           {products.map((product) => (
-            <Card key={product.id} className="product-card overflow-hidden border-none shadow-md card-hover">
-              <div className="h-48 overflow-hidden">
+            <div 
+              key={product.id} 
+              className="product-card group relative overflow-hidden rounded-xl shadow-lg h-[400px]"
+            >
+              <div className="absolute inset-0">
                 <img 
                   src={product.image} 
                   alt={product.title} 
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent"></div>
               </div>
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-mekloy-blue mb-2">{product.title}</h3>
-                <p className="text-gray-600">{product.description}</p>
-              </CardContent>
-            </Card>
+              
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform transition-transform duration-500 group-hover:translate-y-[-10px]">
+                <h3 className="text-2xl font-nexa font-bold mb-2">{product.title}</h3>
+                <p className="text-gray-200 mb-4">{product.description}</p>
+                <Button className="bg-mekloy-yellow text-mekloy-blue hover:bg-amber-300 transition-all">
+                  Learn More
+                </Button>
+              </div>
+            </div>
           ))}
         </div>
       </div>

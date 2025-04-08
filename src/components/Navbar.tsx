@@ -37,7 +37,7 @@ const Navbar = () => {
   }, []);
 
   const navClassName = `fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-    scrolled ? 'bg-white/90 backdrop-blur-md shadow-md py-2' : 'bg-mekloy-blue/80 backdrop-blur-md py-4'
+    scrolled ? 'bg-white shadow-md py-2' : 'bg-mekloy-blue/95 py-4'
   }`;
 
   const scrollToSection = useCallback((sectionId: string) => {
@@ -61,7 +61,7 @@ const Navbar = () => {
   };
 
   const linkClassName = scrolled 
-    ? "text-gray-700 hover:text-mekloy-blue font-medium transition-colors" 
+    ? "text-mekloy-blue hover:text-mekloy-blue/80 font-medium transition-colors" 
     : "text-white hover:text-mekloy-yellow font-medium transition-colors";
 
   return (
@@ -89,8 +89,8 @@ const Navbar = () => {
         <a 
           href="tel:+2348060000000" 
           className={scrolled 
-            ? "hidden md:flex items-center gap-2 text-mekloy-blue hover:text-blue-700 font-medium" 
-            : "hidden md:flex items-center gap-2 text-white hover:text-mekloy-yellow font-medium"}
+            ? "hidden md:flex items-center gap-2 text-white bg-mekloy-blue px-4 py-2 rounded-md hover:bg-mekloy-blue/90 font-medium transition-colors" 
+            : "hidden md:flex items-center gap-2 text-mekloy-blue bg-white px-4 py-2 rounded-md hover:bg-gray-100 font-medium transition-colors"}
         >
           <Phone size={18} />
           <span>Call Now</span>
@@ -98,7 +98,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className={scrolled ? "md:hidden text-gray-700 z-50" : "md:hidden text-white z-50"}
+          className={scrolled ? "md:hidden text-mekloy-blue z-50" : "md:hidden text-white z-50"}
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -108,7 +108,7 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden bg-mekloy-blue/95 backdrop-blur-md fixed inset-0 py-20 px-6 flex flex-col items-center justify-center z-40 animate-fade-in">
+        <div className="md:hidden bg-mekloy-blue fixed inset-0 py-20 px-6 flex flex-col items-center justify-center z-40 animate-fade-in">
           <div className="flex flex-col space-y-6 items-center">
             {NAV_LINKS.map((link) => (
               <Link
@@ -122,7 +122,7 @@ const Navbar = () => {
             ))}
             <a 
               href="tel:+2348060000000" 
-              className="flex items-center gap-2 text-white hover:text-mekloy-yellow font-medium py-2 mt-4"
+              className="flex items-center gap-2 text-mekloy-blue bg-white px-6 py-3 rounded-md hover:bg-gray-100 font-medium mt-4"
             >
               <Phone size={18} />
               <span>Call Now</span>

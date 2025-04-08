@@ -44,33 +44,32 @@ const Hero = () => {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background Image with Parallax */}
-      <div className="absolute inset-0 parallax-bg bg-hero-pattern bg-pattern after:absolute after:inset-0 after:bg-gradient-to-r after:from-mekloy-blue/90 after:to-black/70 after:z-10"></div>
-      
-      {/* Yellow accent */}
-      <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-mekloy-yellow opacity-20 blur-3xl z-20"></div>
+      <div className="absolute inset-0 parallax-bg bg-hero-pattern bg-cover bg-center after:absolute after:inset-0 after:bg-gradient-to-r after:from-mekloy-blue/90 after:to-black/80 after:z-10"></div>
       
       {/* Content */}
-      <div className="container relative z-30 px-6 text-center" ref={textRef}>
-        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight mb-6">
-          <span className="block">Powering Nigeria's</span>
-          <span className="text-mekloy-yellow">Electrical Future</span>
-        </h1>
-        <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto mb-10 font-poppins">
-          Mekloy Integrated Services Company Limited is your premier provider of 
-          electrical products and concrete solutions in Bayelsa State.
-        </p>
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Button asChild size="lg" className="bg-mekloy-yellow text-mekloy-blue hover:bg-amber-200 font-semibold px-8">
-            <Link to="/contact">
-              Get In Touch
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
-          <Button asChild variant="outline" size="lg" className="text-white border-white hover:bg-white/10">
-            <Link to="/projects">
-              Explore Our Projects
-            </Link>
-          </Button>
+      <div className="container relative z-30 px-6 text-center md:text-left" ref={textRef}>
+        <div className="max-w-3xl">
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-nexa font-bold text-white leading-tight mb-6">
+            <span className="block">Powering Nigeria's</span>
+            <span className="text-mekloy-yellow">Electrical Future</span>
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-200 mb-10 font-poppins">
+            Mekloy Integrated Services Company Limited is your premier provider of 
+            electrical products and concrete solutions in Bayelsa State.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
+            <Button asChild size="lg" className="bg-mekloy-yellow text-mekloy-blue hover:bg-amber-300 font-semibold px-8 py-6 text-lg shadow-lg">
+              <Link to="/contact">
+                Get In Touch
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="text-white border-white hover:bg-white/20 py-6 text-lg">
+              <Link to="/projects">
+                Explore Our Projects
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
       
