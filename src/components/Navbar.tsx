@@ -2,10 +2,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Phone, Zap } from 'lucide-react';
+import { Phone } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import CircuitMenuIcon from './CircuitMenuIcon';
+import MekloyLogo from './MekloyLogo';
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -68,8 +69,11 @@ const Navbar = () => {
     <nav className={navClassName}>
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center z-50 group">
-          <Zap className={`mr-1 ${scrolled ? 'text-mekloy-yellow' : 'text-mekloy-yellow'} transition-all duration-300 group-hover:rotate-12`} />
-          <span className={scrolled ? "text-mekloy-blue font-nexa font-bold text-2xl" : "text-white font-nexa font-bold text-2xl"}>MEKLOY</span>
+          <MekloyLogo 
+            color={scrolled ? "#1E3A8A" : "#FFFFFF"} 
+            className="mr-1 group-hover:rotate-12 transition-all duration-300"
+          />
+          <span className={scrolled ? "text-mekloy-blue font-nexa font-bold text-2xl" : "text-white font-nexa font-bold text-2xl"}>Mekloy</span>
         </Link>
 
         {/* Desktop Navigation - now with more space between fewer items */}
