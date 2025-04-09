@@ -67,12 +67,14 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Updated brand colors with better contrasting yellow
+				// Updated brand colors with better contrasting yellow variants
 				mekloy: {
 					blue: '#1E3A8A',
 					'light-blue': '#E0F7FA',
 					yellow: '#FEF08A', // Original yellow
-					'deep-yellow': '#F6E05E', // Darker yellow for better contrast with white
+					'deep-yellow': '#EAB308', // Amber-500 - Darker yellow for better contrast with white
+					'bright-yellow': '#FACC15', // Amber-400 - Slightly brighter but still good contrast
+					'amber-gold': '#F59E0B', // Amber-600 - Even better contrast with white text
 					'orange': '#F97316', // Added orange for high contrast options
 				}
 			},
