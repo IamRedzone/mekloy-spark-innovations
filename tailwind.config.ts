@@ -67,11 +67,13 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Brand colors
+				// Updated brand colors with better contrasting yellow
 				mekloy: {
 					blue: '#1E3A8A',
 					'light-blue': '#E0F7FA',
-					yellow: '#FEF08A',
+					yellow: '#FEF08A', // Original yellow
+					'deep-yellow': '#F6E05E', // Darker yellow for better contrast with white
+					'orange': '#F97316', // Added orange for high contrast options
 				}
 			},
 			borderRadius: {

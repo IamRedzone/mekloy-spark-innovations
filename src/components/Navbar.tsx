@@ -8,12 +8,10 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 gsap.registerPlugin(ScrollToPlugin);
 
+// Updated navigation links - reduced to 4 options
 const NAV_LINKS = [
   { name: 'Home', path: '/' },
-  { name: 'Products', path: '/#products' },
   { name: 'Sectors', path: '/#sectors' },
-  { name: 'Vision', path: '/#vision' },
-  { name: 'Logistics', path: '/#logistics' },
   { name: 'Projects', path: '/projects' },
   { name: 'Contact', path: '/contact' },
 ];
@@ -73,8 +71,8 @@ const Navbar = () => {
           <span className={scrolled ? "text-mekloy-blue font-nexa font-bold text-2xl" : "text-white font-nexa font-bold text-2xl"}>MEKLOY</span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8">
+        {/* Desktop Navigation - now with more space between fewer items */}
+        <div className="hidden md:flex items-center space-x-10">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.name}

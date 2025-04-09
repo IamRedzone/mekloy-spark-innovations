@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -216,6 +217,21 @@ const ProjectsHero = () => (
 const ProjectsList = ({ projects, activeFilter, handleFilterChange, onOpenProject }) => {
   const filterCategories = ['All', 'Industrial', 'Domestic', 'Solar', 'Decor'];
   
+  useEffect(() => {
+    // Fix for project cards animation - using fromTo instead of from
+    gsap.fromTo('.project-card', 
+      { y: 50, opacity: 0 }, 
+      { 
+        y: 0, 
+        opacity: 1, 
+        stagger: 0.1, 
+        duration: 0.6, 
+        ease: 'power3.out',
+        clearProps: "all" // Important - clears properties after animation
+      }
+    );
+  }, [projects]);
+  
   return (
     <section className="py-16 bg-gradient-to-b from-mekloy-light-blue to-white">
       <div className="container mx-auto px-6">
@@ -372,19 +388,10 @@ const Projects = () => {
       ease: 'power3.out',
     });
     
-    gsap.from('.project-card', {
-      y: 50,
-      opacity: 0,
-      stagger: 0.1,
-      duration: 0.6,
-      delay: 0.5,
-      ease: 'power3.out',
-    });
-    
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, [filteredProjects]);
+  }, []);
   
   const handleFilterChange = (category: string) => {
     setActiveFilter(category);
