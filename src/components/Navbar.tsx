@@ -68,7 +68,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center z-50 group">
           <Zap className={`mr-1 ${scrolled ? 'text-mekloy-yellow' : 'text-mekloy-yellow'} transition-all duration-300 group-hover:rotate-12`} />
-          <span className={scrolled ? "text-mekloy-blue font-nexa font-bold text-2xl" : "text-white font-nexa font-bold text-2xl"}>MEKLOY</span>
+          <span className={scrolled ? "text-mekloy-blue font-nexa font-bold text-2xl" : "text-white font-nexa font-bold text-2xl"}>Mekloy</span>
         </Link>
 
         {/* Desktop Navigation - now with more space between fewer items */}
