@@ -46,8 +46,8 @@ const CTA = () => {
   const sectionStyle = {
     padding: '5rem 0',
     backgroundColor: '#1e3a8a',
-    position: 'relative',
-    overflow: 'hidden'
+    position: 'relative' as const, // Type assertion to const to ensure correct Position type
+    overflow: 'hidden' as const    // Type assertion to const for consistency
   };
 
   return (
