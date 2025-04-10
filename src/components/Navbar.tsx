@@ -2,11 +2,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Phone } from 'lucide-react';
+import { Menu, X, Phone, Zap } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import CircuitMenuIcon from './CircuitMenuIcon';
-import MekloyLogo from './MekloyLogo';
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -69,11 +67,8 @@ const Navbar = () => {
     <nav className={navClassName}>
       <div className="container mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center z-50 group">
-          <MekloyLogo 
-            color={scrolled ? "#1E3A8A" : "#FFFFFF"} 
-            className="mr-1 group-hover:rotate-12 transition-all duration-300"
-          />
-          <span className={scrolled ? "text-mekloy-blue font-nexa font-bold text-2xl" : "text-white font-nexa font-bold text-2xl"}>Mekloy</span>
+          <Zap className={`mr-1 ${scrolled ? 'text-mekloy-yellow' : 'text-mekloy-yellow'} transition-all duration-300 group-hover:rotate-12`} />
+          <span className={scrolled ? "text-mekloy-blue font-nexa font-bold text-2xl" : "text-white font-nexa font-bold text-2xl"}>MEKLOY</span>
         </Link>
 
         {/* Desktop Navigation - now with more space between fewer items */}
@@ -104,13 +99,13 @@ const Navbar = () => {
           <span>Call Now</span>
         </a>
 
-        {/* Custom Circuit Menu Button */}
+        {/* Mobile Menu Button */}
         <button
-          className={`md:hidden z-50 ${scrolled ? "text-mekloy-blue" : "text-white"}`}
+          className={scrolled ? "md:hidden text-mekloy-blue z-50" : "md:hidden text-white z-50"}
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
-          <CircuitMenuIcon isOpen={isOpen} />
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
@@ -122,16 +117,16 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className="text-white hover:text-mekloy-deep-yellow py-2 font-medium transition-colors text-xl relative group"
+                className="text-white hover:text-mekloy-yellow py-2 font-medium transition-colors text-xl relative group"
                 onClick={() => handleNavLinkClick(link.path)}
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-mekloy-deep-yellow transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-mekloy-yellow transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
             <a 
               href="tel:+2348060000000" 
-              className="flex items-center gap-2 text-mekloy-blue bg-mekloy-deep-yellow px-6 py-3 rounded-md hover:bg-amber-300 font-medium mt-4 transition-all transform hover:scale-105"
+              className="flex items-center gap-2 text-mekloy-blue bg-mekloy-yellow px-6 py-3 rounded-md hover:bg-amber-300 font-medium mt-4 transition-all transform hover:scale-105"
             >
               <Phone size={18} className="animate-pulse" />
               <span>Call Now</span>

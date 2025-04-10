@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -73,6 +74,7 @@ const TestimonialsCarousel = () => {
   
   useEffect(() => {
     if (inView) {
+      // Start auto rotation
       intervalRef.current = window.setInterval(() => {
         goToNext();
       }, 5000) as unknown as number;
@@ -85,6 +87,7 @@ const TestimonialsCarousel = () => {
     };
   }, [inView, isAnimating]);
   
+  // Pause auto rotation on hover
   const handleMouseEnter = () => {
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -155,7 +158,7 @@ const TestimonialsCarousel = () => {
                     >
                       <CardContent className="p-8 md:p-12">
                         <Quote className="h-12 w-12 text-mekloy-yellow opacity-30 mb-6" />
-                        <p className="text-lg md:text-xl text-[#D3E4FD] bg-mekloy-blue bg-opacity-90 p-4 rounded-lg mb-8 italic">
+                        <p className="text-lg md:text-xl text-gray-700 mb-8">
                           "{testimonial.content}"
                         </p>
                         <div className="flex items-center">
