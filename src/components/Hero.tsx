@@ -11,41 +11,49 @@ const Hero = () => {
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   
   useEffect(() => {
-    if (!heroRef.current || !textRef.current) return;
-    
-    const tl = gsap.timeline();
-    
-    tl.from(textRef.current.children, {
-      opacity: 0,
-      y: 30,
-      stagger: 0.2,
-      duration: 0.8,
-      ease: "power3.out"
-    });
+    try {
+      if (!heroRef.current || !textRef.current) return;
+      
+      const tl = gsap.timeline();
+      
+      tl.from(textRef.current.children, {
+        opacity: 0,
+        y: 30,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: "power3.out"
+      });
 
-    // Add pulsing light effect
-    gsap.to(heroRef.current.querySelector('.light-pulse'), {
-      opacity: 0.7,
-      duration: 2,
-      repeat: -1,
-      yoyo: true,
-      ease: "power1.inOut"
-    });
-    
-    // Parallax effect on scroll
-    gsap.to(heroRef.current.querySelector('.parallax-bg'), {
-      backgroundPositionY: "30%",
-      scrollTrigger: {
-        trigger: heroRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true
+      // Add pulsing light effect
+      gsap.to(heroRef.current.querySelector('.light-pulse'), {
+        opacity: 0.7,
+        duration: 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "power1.inOut"
+      });
+      
+      // Simplified parallax effect that's less likely to cause issues
+      if (typeof window !== 'undefined') {
+        const parallaxBg = heroRef.current.querySelector('.parallax-bg');
+        if (parallaxBg) {
+          const handleScroll = () => {
+            const scrollY = window.scrollY;
+            const yPos = scrollY * 0.2;
+            parallaxBg.setAttribute('style', `background-position-y: ${yPos}px`);
+          };
+          
+          window.addEventListener('scroll', handleScroll);
+          return () => window.removeEventListener('scroll', handleScroll);
+        }
       }
-    });
-    
-    return () => {
-      tl.kill();
-    };
+      
+      return () => {
+        tl.kill();
+      };
+    } catch (error) {
+      console.error("Hero animation error:", error);
+    }
   }, []);
 
   return (
@@ -53,11 +61,18 @@ const Hero = () => {
       ref={heroRef} 
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background Image with Parallax */}
-      <div className="absolute inset-0 parallax-bg bg-hero-pattern bg-cover bg-center after:absolute after:inset-0 after:bg-gradient-to-r after:from-mekloy-blue/90 after:to-black/80 after:z-10"></div>
+      {/* Background with simple image fallback in case gradient is failing */}
+      <div 
+        className="absolute inset-0 parallax-bg bg-cover bg-center" 
+        style={{ 
+          backgroundImage: "linear-gradient(to right, rgba(17, 24, 39, 0.9), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=2000&auto=format&fit=crop&q=80')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      ></div>
       
-      {/* Animated light effect */}
-      <div className="absolute top-1/4 right-1/4 w-32 h-32 rounded-full bg-mekloy-yellow opacity-20 blur-3xl light-pulse z-20"></div>
+      {/* Light effect */}
+      <div className="absolute top-1/4 right-1/4 w-32 h-32 rounded-full bg-yellow-400 opacity-20 blur-3xl light-pulse z-20"></div>
       
       {/* Content */}
       <div className="container relative z-30 px-6 text-center md:text-left" ref={textRef}>

@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -13,6 +12,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -167,25 +167,27 @@ const AccreditationsSection = () => (
 
 const Index = () => {
   useEffect(() => {
-    // Initialize GSAP animations
-    const sections = document.querySelectorAll('section');
-    
-    sections.forEach((section) => {
-      gsap.from(section, {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-          once: true,
-        },
+    try {
+      const sections = document.querySelectorAll('section');
+      
+      sections.forEach((section) => {
+        gsap.from(section, {
+          opacity: 0,
+          y: 30,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 80%',
+            once: true,
+          },
+        });
       });
-    });
+    } catch (error) {
+      console.error("GSAP animation error:", error);
+    }
     
     return () => {
-      // Clean up ScrollTrigger instances
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
@@ -193,18 +195,47 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <Hero />
       
       <main>
-        <ProductsSection />
-        <SectorSection />
-        <VisionSection />
-        <LogisticsSection />
-        <StatsCounter />
-        <TestimonialsCarousel />
-        <AccreditationsSection />
-        <ClientsSlider />
-        <CTA />
+        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Hero section</div>}>
+          <Hero />
+        </ErrorBoundary>
+        
+        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Products section</div>}>
+          <ProductsSection />
+        </ErrorBoundary>
+        
+        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Sector section</div>}>
+          <SectorSection />
+        </ErrorBoundary>
+        
+        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Vision section</div>}>
+          <VisionSection />
+        </ErrorBoundary>
+        
+        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Logistics section</div>}>
+          <LogisticsSection />
+        </ErrorBoundary>
+        
+        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Stats section</div>}>
+          <StatsCounter />
+        </ErrorBoundary>
+        
+        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Testimonials section</div>}>
+          <TestimonialsCarousel />
+        </ErrorBoundary>
+        
+        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Accreditations section</div>}>
+          <AccreditationsSection />
+        </ErrorBoundary>
+        
+        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Clients section</div>}>
+          <ClientsSlider />
+        </ErrorBoundary>
+        
+        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading CTA section</div>}>
+          <CTA />
+        </ErrorBoundary>
       </main>
       
       <Footer />

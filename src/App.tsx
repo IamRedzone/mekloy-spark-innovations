@@ -11,6 +11,7 @@ import Index from "./pages/Index";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 // Create a new QueryClient instance outside the component
 const queryClient = new QueryClient();
@@ -23,12 +24,26 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <ErrorBoundary>
+            <Routes>
+              <Route path="/" element={
+                <ErrorBoundary fallback={<div className="p-4">Error loading Home page</div>}>
+                  <Index />
+                </ErrorBoundary>
+              } />
+              <Route path="/projects" element={
+                <ErrorBoundary fallback={<div className="p-4">Error loading Projects page</div>}>
+                  <Projects />
+                </ErrorBoundary>
+              } />
+              <Route path="/contact" element={
+                <ErrorBoundary fallback={<div className="p-4">Error loading Contact page</div>}>
+                  <Contact />
+                </ErrorBoundary>
+              } />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </ErrorBoundary>
           <WhatsAppButton />
         </BrowserRouter>
       </TooltipProvider>
