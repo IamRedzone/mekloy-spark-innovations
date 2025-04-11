@@ -43,11 +43,11 @@ const CTA = () => {
   }, []);
 
   // Fixed TypeScript type issue with position and overflow properties
-  const sectionStyle = {
+  const sectionStyle: React.CSSProperties = {
     padding: '5rem 0',
     backgroundColor: '#1e3a8a',
-    position: 'relative',
-    overflow: 'hidden'
+    position: 'relative' as const,
+    overflow: 'hidden' as const
   };
 
   return (
