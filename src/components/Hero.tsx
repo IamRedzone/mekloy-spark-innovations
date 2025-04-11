@@ -46,7 +46,7 @@ const Hero = () => {
       ref={heroRef} 
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Video Background - Fixed position for stability */}
+      {/* Video Background */}
       <div className="absolute inset-0 z-0">
         {/* Reduced opacity of overlay to make the section less dark */}
         <div className="absolute inset-0 bg-black/40 z-10"></div>
@@ -56,7 +56,6 @@ const Hero = () => {
           muted
           loop
           playsInline
-          style={{ position: 'fixed' }}
         >
           <source src="https://assets.mixkit.co/videos/preview/mixkit-set-of-transformers-of-a-large-electrical-station-42634-large.mp4" type="video/mp4" />
           Your browser does not support the video tag.

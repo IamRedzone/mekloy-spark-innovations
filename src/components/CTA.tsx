@@ -42,13 +42,13 @@ const CTA = () => {
     }
   }, []);
 
-  // Fixed TypeScript type issue with position and overflow properties
+  // Properly typed CSS properties
   const sectionStyle: React.CSSProperties = {
     padding: '5rem 0',
     backgroundColor: '#1e3a8a',
-    position: 'relative' as const,
-    overflow: 'hidden' as const,
-    zIndex: 1 // Added z-index to ensure the section is visible
+    position: 'relative',
+    overflow: 'hidden',
+    zIndex: 1
   };
 
   return (
