@@ -33,6 +33,21 @@ const Hero = () => {
         ease: "power1.inOut"
       });
       
+      // Simplified parallax effect that's less likely to cause issues
+      if (typeof window !== 'undefined') {
+        const parallaxBg = heroRef.current.querySelector('.parallax-bg');
+        if (parallaxBg) {
+          const handleScroll = () => {
+            const scrollY = window.scrollY;
+            const yPos = scrollY * 0.2;
+            parallaxBg.setAttribute('style', `background-position-y: ${yPos}px`);
+          };
+          
+          window.addEventListener('scroll', handleScroll);
+          return () => window.removeEventListener('scroll', handleScroll);
+        }
+      }
+      
       return () => {
         tl.kill();
       };
@@ -46,20 +61,15 @@ const Hero = () => {
       ref={heroRef} 
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Video Background */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-black/60 z-10"></div>
-        <video 
-          className="absolute inset-0 w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-set-of-transformers-of-a-large-electrical-station-42634-large.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
+      {/* Background with simple image fallback in case gradient is failing */}
+      <div 
+        className="absolute inset-0 parallax-bg bg-cover bg-center" 
+        style={{ 
+          backgroundImage: "linear-gradient(to right, rgba(17, 24, 39, 0.9), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=2000&auto=format&fit=crop&q=80')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      ></div>
       
       {/* Light effect */}
       <div className="absolute top-1/4 right-1/4 w-32 h-32 rounded-full bg-yellow-400 opacity-20 blur-3xl light-pulse z-20"></div>
