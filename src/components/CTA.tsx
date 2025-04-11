@@ -42,12 +42,12 @@ const CTA = () => {
     }
   }, []);
 
-  // Use inline styles as a fallback in case Tailwind classes aren't applying correctly
+  // Fixed TypeScript type issue with position and overflow properties
   const sectionStyle = {
     padding: '5rem 0',
     backgroundColor: '#1e3a8a',
-    position: 'relative' as const, // Type assertion to const to ensure correct Position type
-    overflow: 'hidden' as const    // Type assertion to const for consistency
+    position: 'relative',
+    overflow: 'hidden'
   };
 
   return (
