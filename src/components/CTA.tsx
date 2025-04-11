@@ -47,17 +47,17 @@ const CTA = () => {
     padding: '5rem 0',
     backgroundColor: '#1e3a8a',
     position: 'relative' as const,
-    overflow: 'hidden' as const
+    overflow: 'hidden' as const,
+    zIndex: 1 // Added z-index to ensure the section is visible
   };
 
   return (
     <section className="py-20 bg-mekloy-blue relative overflow-hidden" ref={ctaRef} style={sectionStyle}>
       {/* Background Pulse Element */}
-      <div className="absolute top-40 right-40 w-64 h-64 rounded-full bg-mekloy-yellow opacity-10 bg-pulse"
-           style={{backgroundColor: '#FFDD00', opacity: 0.1, borderRadius: '50%'}}></div>
+      <div className="absolute top-40 right-40 w-64 h-64 rounded-full bg-mekloy-yellow opacity-10 bg-pulse"></div>
       
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5" style={{opacity: 0.05}}>
+      <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
           backgroundImage: 'url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC40Ij48cGF0aCBkPSJNMzYgMzRjMC0yLjIwOS0xLjc5LTQtNC00cy00IDEuNzkxLTQgNGMwIDIuMjA5IDEuNzkgNCA0IDRzNC0xLjc5MSA0LTR6bTAtOGMwLTIuMjA5LTEuNzktNC00LTRzLTQgMS43OTEtNCA0YzAgMi4yMDkgMS43OSA0IDQgNHM0LTEuNzkxIDQtNHptMC0xNmMwIDIuMjA5LTEuNzkgNC00IDRzLTQtMS43OTEtNC00YzAtMi4yMDkgMS43OS00IDQtNHM0IDEuNzkxIDQgNHptLTggMGMwIDIuMjA5LTEuNzkgNC00IDRzLTQtMS43OTEtNC00YzAtMi4yMDkgMS43OS00IDQtNHM0IDEuNzkxIDQgNHptMCA4YzAgMi4yMDktMS43OSA0LTQgNHMtNC0xLjc5MS00LTRjMC0yLjIwOSAxLjc5LTQgNC00czQgMS43OTEgNCA0em0wIDhjMCAyLjIwOS0xLjc5IDQtNCA0cy00LTEuNzkxLTQtNGMwLTIuMjA5IDEuNzktNCA0LTRzNCAxLjc5MSA0IDR6bS0xNi04YzAgMi4yMDktMS43OSA0LTQgNHMtNC0xLjc5MS00LTRjMC0yLjIwOSAxLjc5LTQgNC00czQgMS43OTEgNCA0em0wIDhjMCAyLjIwOS0xLjc5IDQtNCA0cy00LTEuNzkxLTQtNGMwLTIuMjA5IDEuNzktNCA0LTRzNCAxLjc5MSA0IDR6bTAtOGMwLTIuMjA5LTEuNzktNC00LTRzLTQgMS43OTEtNCA0YzAgMi4yMDkgMS43OSA0IDQgNHM0LTEuNzkxIDQtNHoiLz48L2c+PC9nPjwvc3ZnPg==")',
           backgroundRepeat: 'repeat'
@@ -65,14 +65,12 @@ const CTA = () => {
       </div>
       
       {/* Yellow accent */}
-      <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-mekloy-yellow opacity-20 blur-3xl"
-           style={{backgroundColor: '#FFDD00', opacity: 0.2, filter: 'blur(24px)', borderRadius: '50%'}}></div>
+      <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-mekloy-yellow opacity-20 blur-3xl"></div>
       
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="inline-block mb-8 animate-item">
-          <div className="flex items-center justify-center w-16 h-16 mx-auto rounded-full bg-mekloy-yellow/20"
-               style={{backgroundColor: 'rgba(255, 221, 0, 0.2)', borderRadius: '50%'}}>
-            <Zap className="h-8 w-8 text-mekloy-yellow animate-pulse" style={{color: '#FFDD00'}} />
+          <div className="flex items-center justify-center w-16 h-16 mx-auto rounded-full bg-mekloy-yellow/20">
+            <Zap className="h-8 w-8 text-mekloy-yellow animate-pulse" />
           </div>
         </div>
         <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 animate-item">Let's Power Your Projects!</h2>
@@ -85,7 +83,6 @@ const CTA = () => {
             asChild 
             size="lg" 
             className="bg-mekloy-yellow text-mekloy-blue hover:bg-amber-200 font-semibold px-8 group transition-all duration-300 hover:scale-105"
-            style={{backgroundColor: '#FFDD00', color: '#1e3a8a'}}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
@@ -99,7 +96,6 @@ const CTA = () => {
             variant="outline" 
             size="lg" 
             className="text-white border-white hover:bg-white/10 group transition-all duration-300 hover:scale-105"
-            style={{color: 'white', borderColor: 'white'}}
           >
             <a href="tel:+2348060000000" className="flex items-center">
               <Phone size={18} className="mr-2 group-hover:animate-pulse" />

@@ -35,6 +35,7 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Adding higher z-index to ensure navbar is above all other content
   const navClassName = `fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
     scrolled ? 'bg-white shadow-md py-2' : 'bg-mekloy-blue/95 py-4'
   }`;

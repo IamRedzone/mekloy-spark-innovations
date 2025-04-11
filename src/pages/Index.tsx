@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -17,7 +18,7 @@ import ErrorBoundary from '@/components/ErrorBoundary';
 gsap.registerPlugin(ScrollTrigger);
 
 const VisionSection = () => (
-  <section id="vision" className="section relative py-24">
+  <section id="vision" className="section relative py-24 z-[1]">
     <div className="absolute inset-0 bg-vision-pattern bg-cover bg-fixed">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
     </div>
@@ -61,7 +62,7 @@ const VisionSection = () => (
 );
 
 const LogisticsSection = () => (
-  <section id="logistics" className="section relative py-24">
+  <section id="logistics" className="section relative py-24 z-[1]">
     <div className="absolute inset-0 bg-logistics-pattern bg-cover bg-fixed">
       <div className="absolute inset-0 bg-gradient-to-r from-mekloy-blue/95 to-black/90"></div>
     </div>
@@ -131,7 +132,7 @@ const LogisticsSection = () => (
 );
 
 const AccreditationsSection = () => (
-  <section className="py-24 bg-gradient-to-b from-white to-mekloy-light-blue/50">
+  <section className="py-24 bg-gradient-to-b from-white to-mekloy-light-blue/50 relative z-[1]">
     <div className="container mx-auto px-6">
       <h2 className="section-title text-center">Our Accreditations</h2>
       <p className="section-subtitle text-center">
@@ -196,18 +197,20 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar />
       
-      <main>
+      <main className="relative">
         <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Hero section</div>}>
           <Hero />
         </ErrorBoundary>
         
-        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Products section</div>}>
-          <ProductsSection />
-        </ErrorBoundary>
-        
-        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Sector section</div>}>
-          <SectorSection />
-        </ErrorBoundary>
+        <div className="relative z-[2] bg-white">
+          <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Products section</div>}>
+            <ProductsSection />
+          </ErrorBoundary>
+          
+          <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Sector section</div>}>
+            <SectorSection />
+          </ErrorBoundary>
+        </div>
         
         <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Vision section</div>}>
           <VisionSection />
@@ -217,21 +220,23 @@ const Index = () => {
           <LogisticsSection />
         </ErrorBoundary>
         
-        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Stats section</div>}>
-          <StatsCounter />
-        </ErrorBoundary>
-        
-        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Testimonials section</div>}>
-          <TestimonialsCarousel />
-        </ErrorBoundary>
-        
-        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Accreditations section</div>}>
-          <AccreditationsSection />
-        </ErrorBoundary>
-        
-        <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Clients section</div>}>
-          <ClientsSlider />
-        </ErrorBoundary>
+        <div className="relative z-[2] bg-white">
+          <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Stats section</div>}>
+            <StatsCounter />
+          </ErrorBoundary>
+          
+          <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Testimonials section</div>}>
+            <TestimonialsCarousel />
+          </ErrorBoundary>
+          
+          <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Accreditations section</div>}>
+            <AccreditationsSection />
+          </ErrorBoundary>
+          
+          <ErrorBoundary fallback={<div className="p-8 text-center">Error loading Clients section</div>}>
+            <ClientsSlider />
+          </ErrorBoundary>
+        </div>
         
         <ErrorBoundary fallback={<div className="p-8 text-center">Error loading CTA section</div>}>
           <CTA />
