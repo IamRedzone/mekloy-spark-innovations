@@ -65,7 +65,7 @@ const Hero = () => {
           loop
           playsInline
         >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-set-of-transformers-of-a-large-electrical-station-42634-large.mp4" type="video/mp4" />
+          <source src="/mekloy-herobg.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>

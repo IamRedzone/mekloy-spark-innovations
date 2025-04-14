@@ -2,9 +2,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Phone, Zap } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import Logo from '@/components/Logo';
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -67,8 +68,12 @@ const Navbar = () => {
   return (
     <nav className={navClassName}>
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center z-50 group">
-          <Zap className={`mr-1 ${scrolled ? 'text-mekloy-yellow' : 'text-mekloy-yellow'} transition-all duration-300 group-hover:rotate-12`} />
+        <Link to="/" className="flex items-center gap-3 z-50 group">
+          <Logo 
+            className={`mr-1 transition-all duration-300 group-hover:rotate-12`} 
+            color={scrolled ? "#1E3A8A" : "#FFC107"} 
+            size={24}
+          />
           <span className={scrolled ? "text-mekloy-blue font-nexa font-bold text-2xl" : "text-white font-nexa font-bold text-2xl"}>Mekloy</span>
         </Link>
 
