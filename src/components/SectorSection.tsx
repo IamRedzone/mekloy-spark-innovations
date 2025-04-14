@@ -36,9 +36,12 @@ const SectorSection = () => {
     if (!sectionRef.current || !cardsRef.current) return;
 
     // Animation for heading and description
-    gsap.from([sectionRef.current.querySelector('.section-title'), sectionRef.current.querySelector('.section-subtitle')], {
+    gsap.fromTo([sectionRef.current.querySelector('.section-title'), sectionRef.current.querySelector('.section-subtitle')],{
       y: 30,
-      opacity: 0,
+      opacity: 0
+    }, {
+      y: 0,
+      opacity: 1,
       stagger: 0.2,
       duration: 0.8,
       scrollTrigger: {
@@ -48,9 +51,12 @@ const SectorSection = () => {
     });
 
     // Animation for cards
-    gsap.from(cardsRef.current.children, {
-      y: 50,
-      opacity: 0,
+    gsap.fromTo(cardsRef.current.children,{
+      y: 30,
+      opacity: 0
+    }, {
+      y: 0,
+      opacity: 1,
       stagger: 0.2,
       duration: 0.8,
       scrollTrigger: {

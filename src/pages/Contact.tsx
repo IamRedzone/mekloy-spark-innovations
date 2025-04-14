@@ -11,16 +11,21 @@ gsap.registerPlugin(ScrollTrigger);
 const Contact = () => {
   useEffect(() => {
     // GSAP animations
-    gsap.from('.page-title', {
-      y: 30,
-      opacity: 0,
+    gsap.fromTo('.page-title',{
+      y:30,
+      opacity:0
+    }, {
+      y: 0,
+      opacity: 1,
       duration: 0.8,
       ease: 'power3.out',
     });
     
-    gsap.from('.contact-content', {
-      y: 30,
-      opacity: 0,
+    gsap.fromTo('.contact-content',
+      {y:30,
+      opacity:0,} ,{
+      y: 0,
+      opacity: 1,
       duration: 0.8,
       delay: 0.3,
       ease: 'power3.out',

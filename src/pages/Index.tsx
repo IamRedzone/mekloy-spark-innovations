@@ -28,9 +28,12 @@ const Index = () => {
       const sections = document.querySelectorAll('section');
       
       sections.forEach((section) => {
-        gsap.from(section, {
-          opacity: 0,
+        gsap.fromTo(section,{
+          opacity:0,
           y: 30,
+        }, {
+          opacity: 1,
+          y: 0,
           duration: 1,
           ease: 'power3.out',
           scrollTrigger: {

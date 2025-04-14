@@ -16,16 +16,24 @@ const Hero = () => {
       
       const tl = gsap.timeline();
       
-      tl.from(textRef.current.children, {
-        opacity: 0,
+      tl.fromTo(textRef.current.children,{
         y: 30,
+        opacity: 0,
+      }, {
+        opacity: 1,
+        y: 0,
         stagger: 0.2,
         duration: 0.8,
         ease: "power3.out"
       });
 
       // Add pulsing light effect
-      gsap.to(heroRef.current.querySelector('.light-pulse'), {
+      gsap.fromTo(heroRef.current.querySelector('.light-pulse'), {
+        opacity:0.2,
+        scale: 0.8,
+        position: 'absolute',
+        zIndex: 10,
+      },{
         opacity: 0.7,
         duration: 2,
         repeat: -1,

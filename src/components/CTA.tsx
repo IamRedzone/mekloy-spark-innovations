@@ -1,23 +1,23 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { Phone, Zap, ArrowRight } from 'lucide-react';
 
-const CTA = () => {
+export default function CTA(){
   const ctaRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-  
+
   useEffect(() => {
     try {
       if (!ctaRef.current) return;
-      
       const elements = ctaRef.current.querySelectorAll('.animate-item');
-      
-      gsap.from(elements, {
+      gsap.fromTo(elements,{
+        y:0,
+        opacity: 0
+      }, {
         y: 30,
-        opacity: 0,
+        opacity: 1,
         stagger: 0.2,
         duration: 0.8,
         scrollTrigger: {
@@ -108,4 +108,3 @@ const CTA = () => {
   );
 };
 
-export default CTA;

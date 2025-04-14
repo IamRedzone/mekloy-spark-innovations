@@ -373,9 +373,12 @@ const Projects = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   useEffect(() => {
-    gsap.from('.page-title', {
-      y: 30,
-      opacity: 0,
+    gsap.fromTo('.page-title',{
+      y:30,
+      opacity:0,
+    }, {
+      y: 0,
+      opacity: 1,
       duration: 0.8,
       ease: 'power3.out',
     });

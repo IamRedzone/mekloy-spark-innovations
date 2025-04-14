@@ -54,9 +54,13 @@ const ProductsSection = () => {
     if (!sectionRef.current || !cardsRef.current) return;
     
     // Animate section title
-    gsap.from(sectionRef.current.querySelector('.section-title'), {
-      y: 50,
-      opacity: 0,
+    gsap.fromTo(sectionRef.current.querySelector('.section-title'),{
+      y:50,
+      opacity: 0
+    },
+     {
+      y: 0,
+      opacity: 1,
       duration: 0.8,
       scrollTrigger: {
         trigger: sectionRef.current,
@@ -65,9 +69,12 @@ const ProductsSection = () => {
     });
     
     // Animate section subtitle
-    gsap.from(sectionRef.current.querySelector('.section-subtitle'), {
+    gsap.fromTo(sectionRef.current.querySelector('.section-subtitle'),{
       y: 30,
-      opacity: 0,
+      opacity: 0
+    }, {
+      y: 0,
+      opacity: 1,
       duration: 0.8,
       delay: 0.2,
       scrollTrigger: {
@@ -77,9 +84,12 @@ const ProductsSection = () => {
     });
     
     // Animate cards
-    gsap.from(cardsRef.current.querySelectorAll('.product-card'), {
+    gsap.fromTo(cardsRef.current.querySelectorAll('.product-card'),{
       y: 50,
-      opacity: 0,
+      opacity: 0
+    }, {
+      y: 0,
+      opacity: 1,
       stagger: 0.1,
       duration: 0.6,
       scrollTrigger: {
