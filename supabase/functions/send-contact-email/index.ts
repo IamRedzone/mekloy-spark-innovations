@@ -7,6 +7,7 @@ const RECIPIENT_EMAIL = "mekloyintegrated@gmail.com";
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS'
 };
 
 interface ContactFormData {
@@ -22,7 +23,22 @@ const handler = async (req: Request): Promise<Response> => {
   
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
-    return new Response(null, { headers: corsHeaders });
+    return new Response(null, { 
+      status: 204, 
+      headers: corsHeaders 
+    });
+  }
+
+  // Only allow POST requests
+  if (req.method !== 'POST') {
+    console.error(`Method not allowed: ${req.method}`);
+    return new Response(
+      JSON.stringify({ error: 'Method not allowed' }),
+      { 
+        status: 405,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      }
+    );
   }
 
   try {
@@ -41,12 +57,25 @@ const handler = async (req: Request): Promise<Response> => {
     // Parse form data
     let formData: ContactFormData;
     try {
-      formData = await req.json();
-      console.log("Received form data:", JSON.stringify(formData));
+      const bodyText = await req.text();
+      console.log("Raw request body:", bodyText);
+      
+      if (!bodyText) {
+        return new Response(
+          JSON.stringify({ error: 'Empty request body' }),
+          { 
+            status: 400, 
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          }
+        );
+      }
+      
+      formData = JSON.parse(bodyText);
+      console.log("Parsed form data:", JSON.stringify(formData));
     } catch (parseError) {
       console.error('Error parsing request body:', parseError);
       return new Response(
-        JSON.stringify({ error: 'Invalid request body format' }),
+        JSON.stringify({ error: 'Invalid request body format', details: parseError.message }),
         { 
           status: 400, 
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -56,9 +85,30 @@ const handler = async (req: Request): Promise<Response> => {
     
     // Validate required fields
     if (!formData.name || !formData.email || !formData.message) {
-      console.error('Missing required form fields');
+      const missingFields = [];
+      if (!formData.name) missingFields.push('name');
+      if (!formData.email) missingFields.push('email');
+      if (!formData.message) missingFields.push('message');
+      
+      console.error('Missing required form fields:', missingFields);
       return new Response(
-        JSON.stringify({ error: 'Missing required form fields' }),
+        JSON.stringify({ 
+          error: 'Missing required form fields', 
+          missingFields 
+        }),
+        { 
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        }
+      );
+    }
+    
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      console.error('Invalid email format:', formData.email);
+      return new Response(
+        JSON.stringify({ error: 'Invalid email format' }),
         { 
           status: 400,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -90,32 +140,31 @@ const handler = async (req: Request): Promise<Response> => {
           ${formData.phone ? `<p><strong>Phone:</strong> ${formData.phone}</p>` : ''}
           ${formData.company ? `<p><strong>Company:</strong> ${formData.company}</p>` : ''}
           <p><strong>Message:</strong></p>
-          <p>${formData.message}</p>
+          <p>${formData.message.replace(/\n/g, '<br>')}</p>
         `
       })
     });
 
-    // Check if the main email was sent successfully
+    // Log full API response for debugging
+    const responseText = await response.text();
+    console.log(`Brevo API response (${response.status}):`, responseText);
+    
+    // Parse response if it's JSON
     let responseData;
     try {
-      responseData = await response.json();
-      console.log('Main email response:', JSON.stringify(responseData));
+      responseData = JSON.parse(responseText);
     } catch (parseError) {
-      console.error('Error parsing Brevo API response:', parseError);
-      return new Response(
-        JSON.stringify({ error: 'Error parsing email service response' }),
-        { 
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
+      console.log('Response is not JSON, using raw text');
+      responseData = { rawResponse: responseText };
     }
     
+    // Handle Brevo API errors
     if (!response.ok) {
-      console.error('Brevo API error:', responseData);
+      console.error(`Brevo API error (${response.status}):`, responseData);
       return new Response(
         JSON.stringify({ 
           error: 'Failed to send email', 
+          status: response.status,
           details: responseData?.message || 'Unknown error' 
         }),
         { 
@@ -151,11 +200,19 @@ const handler = async (req: Request): Promise<Response> => {
         })
       });
 
-      const confirmationData = await confirmationResponse.json();
-      console.log('Confirmation email response:', JSON.stringify(confirmationData));
+      const confirmationText = await confirmationResponse.text();
+      console.log(`Confirmation email response (${confirmationResponse.status}):`, confirmationText);
+      
+      let confirmationData;
+      try {
+        confirmationData = JSON.parse(confirmationText);
+      } catch (parseError) {
+        console.log('Confirmation response is not JSON, using raw text');
+        confirmationData = { rawResponse: confirmationText };
+      }
       
       if (!confirmationResponse.ok) {
-        console.error('Failed to send confirmation email', confirmationData);
+        console.warn('Failed to send confirmation email', confirmationData);
         // We don't throw here as the main email was sent successfully
       }
     } catch (confirmationError) {
@@ -165,7 +222,10 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Return success response
     return new Response(
-      JSON.stringify({ success: true, message: 'Message sent successfully' }),
+      JSON.stringify({ 
+        success: true, 
+        message: 'Message sent successfully'
+      }),
       {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }
@@ -176,7 +236,8 @@ const handler = async (req: Request): Promise<Response> => {
     return new Response(
       JSON.stringify({ 
         error: 'Server error processing your request',
-        details: error instanceof Error ? error.message : 'Unknown error' 
+        details: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined
       }),
       { 
         status: 500,
