@@ -29,41 +29,16 @@ const handler = async (req: Request): Promise<Response> => {
     // Validate API key is available
     if (!BREVO_API_KEY) {
       console.error('Missing BREVO_API_KEY environment variable');
-      return new Response(
-        JSON.stringify({ error: 'Server configuration error: Missing API key' }),
-        { 
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
+      throw new Error('Server configuration error: Missing API key');
     }
     
     // Parse form data
-    let formData: ContactFormData;
-    try {
-      formData = await req.json();
-      console.log("Received form data:", JSON.stringify(formData));
-    } catch (parseError) {
-      console.error('Error parsing request body:', parseError);
-      return new Response(
-        JSON.stringify({ error: 'Invalid request body format' }),
-        { 
-          status: 400, 
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
-    }
+    const formData: ContactFormData = await req.json();
+    console.log("Received form data:", JSON.stringify(formData));
     
-    // Validate required fields
     if (!formData.name || !formData.email || !formData.message) {
       console.error('Missing required form fields');
-      return new Response(
-        JSON.stringify({ error: 'Missing required form fields' }),
-        { 
-          status: 400,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
+      throw new Error('Missing required form fields');
     }
     
     // Send email using Brevo API
@@ -96,33 +71,12 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     // Check if the main email was sent successfully
-    let responseData;
-    try {
-      responseData = await response.json();
-      console.log('Main email response:', JSON.stringify(responseData));
-    } catch (parseError) {
-      console.error('Error parsing Brevo API response:', parseError);
-      return new Response(
-        JSON.stringify({ error: 'Error parsing email service response' }),
-        { 
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
-    }
+    const responseData = await response.json();
+    console.log('Main email response:', JSON.stringify(responseData));
     
     if (!response.ok) {
       console.error('Brevo API error:', responseData);
-      return new Response(
-        JSON.stringify({ 
-          error: 'Failed to send email', 
-          details: responseData?.message || 'Unknown error' 
-        }),
-        { 
-          status: 500,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-        }
-      );
+      throw new Error('Failed to send email: ' + (responseData.message || 'Unknown error'));
     }
 
     // Send confirmation email to the user
@@ -164,20 +118,14 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     // Return success response
-    return new Response(
-      JSON.stringify({ success: true, message: 'Message sent successfully' }),
-      {
-        status: 200,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
-      }
-    );
+    return new Response(JSON.stringify({ success: true }), {
+      status: 200,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+    });
   } catch (error) {
     console.error('Error in send-contact-email function:', error);
     return new Response(
-      JSON.stringify({ 
-        error: 'Server error processing your request',
-        details: error instanceof Error ? error.message : 'Unknown error' 
-      }),
+      JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
       { 
         status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' }

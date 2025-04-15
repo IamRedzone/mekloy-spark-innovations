@@ -1,10 +1,11 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { Phone, Mail, MapPin, Send, AlertTriangle } from 'lucide-react';
+import { Phone, Mail, MapPin, Send } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
@@ -52,17 +53,6 @@ const ContactForm = () => {
       return;
     }
     
-    // Validate required fields on client-side before sending
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      setErrorMessage("Please fill in all required fields (name, email, and message).");
-      toast({
-        title: "Validation Error",
-        description: "Please fill in all required fields.",
-        variant: "destructive"
-      });
-      return;
-    }
-    
     setIsSubmitting(true);
     
     try {
@@ -87,14 +77,6 @@ const ContactForm = () => {
         throw new Error(error.message || 'Error sending message');
       }
 
-      // Check for errors in the response data itself
-      if (data && data.error) {
-        console.error('Function response error:', data.error);
-        throw new Error(data.error || 'Error processing your message');
-      }
-
-      console.log('Success response:', data);
-      
       toast({
         title: "Message sent!",
         description: "Thank you for contacting us. We'll get back to you soon.",
@@ -194,7 +176,6 @@ const ContactForm = () => {
           <CardContent className="p-8">
             {errorMessage && (
               <Alert variant="destructive" className="mb-4">
-                <AlertTriangle className="h-4 w-4" />
                 <AlertTitle>Error</AlertTitle>
                 <AlertDescription>{errorMessage}</AlertDescription>
               </Alert>
@@ -276,8 +257,8 @@ const ContactForm = () => {
                   />
                 </div>
                 
-                {/* Honeypot field for bot detection - hidden with CSS */}
-                <div className="honeypot" style={{ opacity: 0, position: 'absolute', top: '-1000px', left: '-1000px' }}>
+                {/* Honeypot field for bot detection */}
+                <div className="honeypot">
                   <label htmlFor="honeypot">Leave this field empty</label>
                   <Input
                     id="honeypot"
