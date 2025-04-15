@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Phone, Mail, MapPin, Send } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -18,14 +20,18 @@ const ContactForm = () => {
     honeypot: '' // Anti-bot field
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    // Clear error when user starts typing again
+    if (errorMessage) setErrorMessage(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage(null);
     
     // Bot detection - if honeypot is filled, silently "succeed" without sending
     if (formData.honeypot) {
@@ -50,6 +56,12 @@ const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
+      console.log("Submitting form data:", {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message
+      });
+      
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
         body: {
           name: formData.name,
@@ -60,7 +72,10 @@ const ContactForm = () => {
         }
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw new Error(error.message || 'Error sending message');
+      }
 
       toast({
         title: "Message sent!",
@@ -78,6 +93,12 @@ const ContactForm = () => {
       });
     } catch (error) {
       console.error('Error sending message:', error);
+      setErrorMessage(
+        error instanceof Error 
+          ? error.message 
+          : "Please try again later or contact us directly at mekloyintegrated@gmail.com"
+      );
+      
       toast({
         title: "Error sending message",
         description: "Please try again later or contact us directly at mekloyintegrated@gmail.com",
@@ -97,6 +118,7 @@ const ContactForm = () => {
           Fill out the form and we'll get back to you as soon as possible.
         </p>
         
+        {/* Contact Info Section */}
         <div className="space-y-6">
           <div className="flex items-center space-x-4">
             <div className="w-12 h-12 rounded-full bg-mekloy-blue/10 flex items-center justify-center flex-shrink-0">
@@ -133,6 +155,7 @@ const ContactForm = () => {
           </div>
         </div>
         
+        {/* WhatsApp Link */}
         <div className="mt-10">
           <a 
             href="https://wa.me/2348143728843?text=Hello%20Mekloy,%20I'm%20interested%20in%20your%20services." 
@@ -151,6 +174,13 @@ const ContactForm = () => {
       <div>
         <Card className="border-none shadow-lg">
           <CardContent className="p-8">
+            {errorMessage && (
+              <Alert variant="destructive" className="mb-4">
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>{errorMessage}</AlertDescription>
+              </Alert>
+            )}
+            
             <form onSubmit={handleSubmit}>
               <div className="space-y-4">
                 <div>
