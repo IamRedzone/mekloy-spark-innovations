@@ -12,37 +12,37 @@ const products = [
     id: 1,
     title: 'Concrete Vibrated Electrical Poles',
     description: 'High-quality, durable concrete poles for electrical power transmission and distribution.',
-    image: 'https://images.unsplash.com/photo-1609767691439-38f527f93322?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+    image: 'https://images.unsplash.com/photo-1626088689757-ae8e6fc31ef0?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
   },
   {
     id: 2,
     title: 'Industrial Electrical Products',
     description: 'Comprehensive range of electrical products designed for industrial applications and heavy-duty usage.',
-    image: 'https://images.unsplash.com/photo-1565138146061-e29b079736c6?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+    image: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
   },
   {
     id: 3,
     title: 'Domestic Electrical Solutions',
     description: 'Stylish and functional electrical products for modern homes with an emphasis on safety and aesthetics.',
-    image: 'https://images.unsplash.com/photo-1556025752-6c5cef89dbc4?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+    image: 'https://images.unsplash.com/photo-1523437345381-db5ee4df9c04?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
   },
   {
     id: 4,
     title: 'Solar Energy Systems',
     description: 'Renewable energy solutions including solar panels, inverters, and complete off-grid systems.',
-    image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+    image: 'https://images.unsplash.com/photo-1613665813446-82a78c468a1d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
   },
   {
     id: 5,
     title: 'Concrete Cast Products',
     description: 'Specialized concrete products for various applications in construction and infrastructure.',
-    image: 'https://images.unsplash.com/photo-1578824503802-81d9f6053807?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+    image: 'https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
   },
   {
     id: 6,
     title: 'Electrical Accessories',
     description: 'A wide range of electrical accessories and components for installations and maintenance.',
-    image: 'https://images.unsplash.com/photo-1662046461903-33d208ef6fc7?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+    image: 'https://images.unsplash.com/photo-1565138146061-e29b079736c6?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
   },
 ];
 
