@@ -26,50 +26,79 @@ const AboutUsSection = () => {
     <section className="py-24 bg-white relative overflow-hidden">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="relative">
-            <div className="rounded-lg overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1521791055366-0d553872125f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" 
-                alt="Mekloy team at work" 
-                className="w-full h-[500px] object-cover"
-              />
+          <div className="space-y-8">
+            <div className="relative">
+              <div className="rounded-lg overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" 
+                  alt="CEO of Mekloy" 
+                  className="w-full h-[400px] object-cover"
+                />
+              </div>
+              <div className="absolute -bottom-6 -right-6 bg-mekloy-blue p-8 rounded-lg shadow-xl">
+                <h3 className="text-white text-4xl font-bold">20+</h3>
+                <p className="text-gray-200">Years of Excellence</p>
+              </div>
             </div>
-            <div className="absolute -bottom-6 -right-6 bg-mekloy-blue p-8 rounded-lg shadow-xl">
-              <h3 className="text-white text-4xl font-bold">20+</h3>
-              <p className="text-gray-200">Years of Excellence</p>
+            
+            <div className="bg-gray-50 p-8 rounded-lg">
+              <h3 className="text-xl font-bold text-mekloy-blue mb-4">Message from our CEO</h3>
+              <p className="text-gray-600 italic">
+                "At Mekloy, we've built our reputation on delivering excellence in electrical infrastructure. 
+                Our commitment to quality, innovation, and customer satisfaction has been the cornerstone of 
+                our success for over two decades. We're not just building electrical systems; we're powering 
+                Nigeria's future."
+              </p>
+              <div className="mt-4">
+                <p className="font-bold text-mekloy-blue">Dr. Sarah Johnson</p>
+                <p className="text-gray-500">Chief Executive Officer</p>
+              </div>
             </div>
           </div>
           
           <div>
             <h2 className="text-4xl font-bold text-mekloy-blue mb-6">Our Journey of Excellence</h2>
-            <p className="text-gray-600 mb-8 text-lg">
-              Since our establishment in 2003, Mekloy Integrated Services has been at the forefront of 
-              electrical infrastructure development in Nigeria. Our commitment to quality and innovation 
-              has made us a trusted partner in both public and private sector projects.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div className="space-y-6">
+              <p className="text-gray-600 text-lg">
+                Founded in 2003, Mekloy Integrated Services emerged from a vision to transform Nigeria's 
+                electrical infrastructure landscape. What began as a small electrical contracting firm has 
+                grown into one of the country's leading providers of comprehensive electrical solutions.
+              </p>
+              
               <div className="bg-gray-50 p-6 rounded-lg">
                 <History className="text-mekloy-blue mb-4 h-8 w-8" />
-                <h3 className="text-xl font-bold mb-2">Our Legacy</h3>
-                <p className="text-gray-600">Two decades of transforming Nigeria's electrical landscape.</p>
+                <h3 className="text-xl font-bold mb-2">Our Heritage</h3>
+                <p className="text-gray-600">
+                  From our first project installing electrical poles in Bayelsa State to our current 
+                  nationwide operations, we've maintained our commitment to excellence and innovation.
+                </p>
               </div>
               
               <div className="bg-gray-50 p-6 rounded-lg">
                 <Users className="text-mekloy-blue mb-4 h-8 w-8" />
-                <h3 className="text-xl font-bold mb-2">Expert Team</h3>
-                <p className="text-gray-600">Skilled professionals dedicated to excellence.</p>
+                <h3 className="text-xl font-bold mb-2">Our Team</h3>
+                <p className="text-gray-600">
+                  With over 150 skilled professionals, including certified engineers and technicians, 
+                  we bring expertise and dedication to every project.
+                </p>
               </div>
               
               <div className="bg-gray-50 p-6 rounded-lg">
                 <Target className="text-mekloy-blue mb-4 h-8 w-8" />
-                <h3 className="text-xl font-bold mb-2">Our Mission</h3>
-                <p className="text-gray-600">Powering progress through reliable electrical solutions.</p>
+                <h3 className="text-xl font-bold mb-2">Our Vision</h3>
+                <p className="text-gray-600">
+                  To be Nigeria's most trusted provider of electrical infrastructure solutions, 
+                  setting industry standards in quality and innovation.
+                </p>
               </div>
             </div>
             
-            <Button className="bg-mekloy-yellow text-mekloy-blue hover:bg-amber-300">
-              Learn More About Us
+            <Button 
+              className="bg-mekloy-yellow text-mekloy-blue hover:bg-amber-300 mt-8"
+              onClick={() => window.location.href = '/projects'}
+            >
+              Explore Our Projects
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>
