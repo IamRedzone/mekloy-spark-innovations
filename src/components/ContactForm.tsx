@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Phone, Mail, MapPin, Send, AlertTriangle } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
+// Removed unused supabase import
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import emailjs from '@emailjs/browser';
 
 const ContactForm = () => {
+  const form = useRef();
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: '',
@@ -72,33 +74,63 @@ const ContactForm = () => {
         message: formData.message
       });
       
-      const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: {
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          company: formData.company,
-          message: formData.message
-        }
-      });
+      // const { data, error } = await supabase.functions.invoke('send-contact-email', {
+      //   body: {
+      //     name: formData.name,
+      //     email: formData.email,
+      //     phone: formData.phone,
+      //     company: formData.company,
+      //     message: formData.message
+      //   }
+      // });
 
-      if (error) {
-        console.error('Supabase function error:', error);
-        throw new Error(error.message || 'Error sending message');
+      interface EmailJSResponse {
+        text: string;
       }
 
-      // Check for errors in the response data itself
-      if (data && data.error) {
-        console.error('Function response error:', data.error);
-        throw new Error(data.error || 'Error processing your message');
+      interface EmailJSParams {
+        serviceId: string;
+        templateId: string;
+        publicKey: string;
       }
 
-      console.log('Success response:', data);
+      const sendEmail = (): void => {
+        emailjs
+          .sendForm(
+            "service_tk76s5n",
+            "template_b2w0k28",
+            form.current as HTMLFormElement,
+            "EOF6ntTJC2lDe4Toc"
+          )
+          .then(
+            () => {
+              console.log('SUCCESS!');
+            },
+            (error: EmailJSResponse) => {
+              console.log('FAILED...', error.text);
+            }
+          );
+      };
+
+      sendEmail();
+
+      // if (error) {
+      //   console.error('Supabase function error:', error);
+      //   throw new Error(error.message || 'Error sending message');
+      // }
+
+      // // Check for errors in the response data itself
+      // if (data && data.error) {
+      //   console.error('Function response error:', data.error);
+      //   throw new Error(data.error || 'Error processing your message');
+      // }
+
+      // console.log('Success response:', data);
       
-      toast({
-        title: "Message sent!",
-        description: "Thank you for contacting us. We'll get back to you soon.",
-      });
+      // toast({
+      //   title: "Message sent!",
+      //   description: "Thank you for contacting us. We'll get back to you soon.",
+      // });
       
       // Reset form
       setFormData({
@@ -200,7 +232,7 @@ const ContactForm = () => {
               </Alert>
             )}
             
-            <form onSubmit={handleSubmit}>
+            <form ref={form} onSubmit={handleSubmit}>
               <div className="space-y-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -211,7 +243,7 @@ const ContactForm = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    required
+                    // required
                     className="w-full"
                     placeholder="John Doe"
                   />
