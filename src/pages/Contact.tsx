@@ -81,21 +81,21 @@ const Contact = () => {
               <h3 className="text-2xl font-bold text-mekloy-blue mb-6">Visit Our Office</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="bg-mekloy-light-blue p-6 rounded-lg">
-                  <h4 className="text-xl font-semibold text-mekloy-blue mb-4">Head Office</h4>
-                  <p className="text-gray-700 mb-2">123 Mekloy Road</p>
+                  <h4 className="text-xl font-semibold text-mekloy-blue mb-4">Head Office and Manufacturing facility</h4>
+                  <p className="text-gray-700 mb-2">beside Winners junction Etegwe</p>
                   <p className="text-gray-700 mb-2">Yenagoa, Bayelsa State</p>
                   <p className="text-gray-700 mb-2">Nigeria</p>
                   <p className="text-gray-700">
-                    <strong>Hours:</strong> Monday - Friday: 8am - 5pm
+                    <strong>Hours:</strong> Monday - Saturday: 8am - 6pm
                   </p>
                 </div>
                 <div className="bg-mekloy-light-blue p-6 rounded-lg">
-                  <h4 className="text-xl font-semibold text-mekloy-blue mb-4">Manufacturing Facility</h4>
-                  <p className="text-gray-700 mb-2">456 Industrial Avenue</p>
+                  <h4 className="text-xl font-semibold text-mekloy-blue mb-4">Branch Office</h4>
+                  <p className="text-gray-700 mb-2">Opposite Opolo market</p>
                   <p className="text-gray-700 mb-2">Yenagoa, Bayelsa State</p>
                   <p className="text-gray-700 mb-2">Nigeria</p>
                   <p className="text-gray-700">
-                    <strong>Hours:</strong> Monday - Saturday: 7am - 6pm
+                    <strong>Hours:</strong> Monday - Saturday: 8am - 6pm
                   </p>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Instagram, Linkedin, Facebook, Zap } from 'lucide-react';
+import { Phone, Mail, MapPin, Linkedin, Facebook, Zap } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -40,7 +40,7 @@ const Footer = () => {
               <div className="flex items-center space-x-3 group hover:translate-x-1 transition-transform duration-300">
                 <Mail size={20} className="text-mekloy-deep-yellow group-hover:animate-pulse" />
                 <a href="mailto:info@mekloy.com" className="text-gray-300 group-hover:text-white transition-colors">
-                  info@mekloy.com
+                  mekloyintegrated@gmail.com
                 </a>
               </div>
             </div>
@@ -78,9 +78,8 @@ const Footer = () => {
             
             <div className="flex space-x-4 mt-8">
               {[
-                { id: 1, icon: Facebook, href: "#" },
-                { id: 2, icon: Instagram, href: "#" },
-                { id: 3, icon: Linkedin, href: "#" }
+                { id: 1, icon: Facebook, href: "https://web.facebook.com/profile.php?id=61575608905455" },
+                { id: 2, icon: Linkedin, href: "https://www.linkedin.com/company/mekloy-integrated/?viewAsMember=true" }
               ].map((social) => (
                 <a 
                   key={social.id}

@@ -12,19 +12,19 @@ const products = [
     id: 1,
     title: 'Concrete Vibrated Electrical Poles',
     description: 'High-quality, durable concrete poles for electrical power transmission and distribution.',
-    image: 'https://images.unsplash.com/photo-1521391406205-6c867cd28c54?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+    image: 'round-poles.webp',
   },
   {
     id: 2,
     title: 'Industrial Electrical Products',
     description: 'Comprehensive range of electrical products designed for industrial applications and heavy-duty usage.',
-    image: 'https://images.unsplash.com/photo-1542892770-3c8a9608a0c5?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+    image: 'https://images.unsplash.com/photo-1587351177685-2774615c6506?q=80&w=2127&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: 3,
     title: 'Domestic Electrical Solutions',
     description: 'Stylish and functional electrical products for modern homes with an emphasis on safety and aesthetics.',
-    image: 'https://images.unsplash.com/photo-1558211583-d26f610c1eb1?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+    image: 'https://images.unsplash.com/photo-1507494924047-60b8ee826ca9?q=80&w=1973&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   },
   {
     id: 4,
@@ -35,14 +35,14 @@ const products = [
   {
     id: 5,
     title: 'Concrete Cast Products',
-    description: 'Specialized concrete products for various applications in construction and infrastructure.',
-    image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+    description: 'chutes for gutters, manholes, and other concrete cast products for construction and civil engineering.',
+    image: '/chutes.webp',
   },
   {
     id: 6,
     title: 'Electrical Accessories',
     description: 'A wide range of electrical accessories and components for installations and maintenance.',
-    image: 'https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
+    image: '/circuit-breaker-img.png',
   },
 ];
 

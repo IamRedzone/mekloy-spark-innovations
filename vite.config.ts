@@ -9,6 +9,10 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    allowedHosts: [
+      "57045f31-f716-4249-a9b0-334efe9514f7.lovableproject.com", // Your specific host
+      ".lovableproject.com", // Wildcard to allow all subdomains
+    ],
   },
   plugins: [
     react(),
