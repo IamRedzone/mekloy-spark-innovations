@@ -73,7 +73,11 @@ const Contact = () => {
             <div className="w-full h-96 bg-gray-300 rounded-lg overflow-hidden shadow-md">
               {/* Placeholder for Google Map */}
               <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                <p className="text-gray-600 text-lg">Map will be embedded here.</p>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3974.94183464278!2d6.3511291!3d4.949328500000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x106a0153b547dd2d%3A0xb5938a2dc4339b39!2sMekloy%20Electrical%20Company!5e0!3m2!1sen!2sng!4v1745252636541!5m2!1sen!2sng"
+               width="600"
+               height="450"
+              loading="lazy"
+              ></iframe>
               </div>
             </div>
             
