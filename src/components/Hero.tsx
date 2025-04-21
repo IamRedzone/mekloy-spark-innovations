@@ -91,7 +91,7 @@ const Hero = () => {
           </h1>
           <p className="text-xl md:text-2xl text-gray-200 mb-10 font-poppins">
             Mekloy Integrated Services Company Limited is your premier provider of 
-            electrical products and concrete solutions in Bayelsa State.
+            electrical products and concrete solutions in the Niger Delta.
           </p>
           <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
             <Button 
