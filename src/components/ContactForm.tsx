@@ -1,11 +1,11 @@
+
 import React, { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { Phone, Mail, MapPin, Send, AlertTriangle } from 'lucide-react';
-// Removed unused supabase import
+import { Phone, Mail, MapPin, Send, AlertTriangle, CheckCircle } from 'lucide-react';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import emailjs from '@emailjs/browser';
 
@@ -22,17 +22,20 @@ const ContactForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing again
+    // Clear error or success message when user starts typing again
     if (errorMessage) setErrorMessage(null);
+    if (successMessage) setSuccessMessage(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
+    setSuccessMessage(null);
     
     // Bot detection - if honeypot is filled, silently "succeed" without sending
     if (formData.honeypot) {
@@ -40,6 +43,8 @@ const ContactForm = () => {
         title: "Message sent!",
         description: "We'll get back to you soon.",
       });
+
+      setSuccessMessage("Thank you for your message! We will get back to you soon.");
       
       // Reset form
       setFormData({
@@ -74,16 +79,6 @@ const ContactForm = () => {
         message: formData.message
       });
       
-      // const { data, error } = await supabase.functions.invoke('send-contact-email', {
-      //   body: {
-      //     name: formData.name,
-      //     email: formData.email,
-      //     phone: formData.phone,
-      //     company: formData.company,
-      //     message: formData.message
-      //   }
-      // });
-
       interface EmailJSResponse {
         text: string;
       }
@@ -114,23 +109,12 @@ const ContactForm = () => {
 
       sendEmail();
 
-      // if (error) {
-      //   console.error('Supabase function error:', error);
-      //   throw new Error(error.message || 'Error sending message');
-      // }
-
-      // // Check for errors in the response data itself
-      // if (data && data.error) {
-      //   console.error('Function response error:', data.error);
-      //   throw new Error(data.error || 'Error processing your message');
-      // }
-
-      // console.log('Success response:', data);
+      toast({
+        title: "Message sent!",
+        description: "Thank you for contacting us. We'll get back to you soon.",
+      });
       
-      // toast({
-      //   title: "Message sent!",
-      //   description: "Thank you for contacting us. We'll get back to you soon.",
-      // });
+      setSuccessMessage("Thank you for your message! We will get back to you soon.");
       
       // Reset form
       setFormData({
@@ -231,6 +215,15 @@ const ContactForm = () => {
                 <AlertDescription>{errorMessage}</AlertDescription>
               </Alert>
             )}
+            {successMessage && (
+              <Alert variant="default" className="mb-6 border-green-600 text-green-800 bg-green-50 flex items-center gap-2">
+                <CheckCircle className="h-5 w-5" />
+                <div>
+                  <AlertTitle>Success</AlertTitle>
+                  <AlertDescription>{successMessage}</AlertDescription>
+                </div>
+              </Alert>
+            )}
             
             <form ref={form} onSubmit={handleSubmit}>
               <div className="space-y-4">
@@ -243,7 +236,6 @@ const ContactForm = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    // required
                     className="w-full"
                     placeholder="John Doe"
                   />
@@ -308,7 +300,7 @@ const ContactForm = () => {
                   />
                 </div>
                 
-                {/* Honeypot field for bot detection - hidden with CSS */}
+                {/* Honeypot field for bot detection */}
                 <div className="honeypot" style={{ opacity: 0, position: 'absolute', top: '-1000px', left: '-1000px' }}>
                   <label htmlFor="honeypot">Leave this field empty</label>
                   <Input
