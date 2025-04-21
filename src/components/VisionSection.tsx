@@ -37,8 +37,8 @@ const VisionSection = () => (
         </div>
         
         <div className="flex justify-center mt-16">
-          <Button className="bg-mekloy-yellow text-mekloy-blue hover:bg-white transition-all text-lg px-8 py-6">
-            Learn About Our Mission
+          <Button onClick={() => window.location.href = '/contact'} className="bg-mekloy-yellow text-mekloy-blue hover:bg-white transition-all text-lg px-8 py-6">
+            Get to meet the team
             <ArrowRight className="ml-2" />
           </Button>
         </div>

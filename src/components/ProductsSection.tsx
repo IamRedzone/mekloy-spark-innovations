@@ -129,8 +129,8 @@ const ProductsSection = () => {
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform transition-transform duration-500 group-hover:translate-y-[-10px]">
                 <h3 className="text-2xl font-nexa font-bold mb-2">{product.title}</h3>
                 <p className="text-gray-200 mb-4">{product.description}</p>
-                <Button className="bg-mekloy-yellow text-mekloy-blue hover:bg-amber-300 transition-all">
-                  Learn More
+                <Button onClick={() => window.location.href = '/contact'} className="bg-mekloy-yellow text-mekloy-blue hover:bg-amber-300 transition-all">
+                  Get in Touch 
                 </Button>
               </div>
             </div>

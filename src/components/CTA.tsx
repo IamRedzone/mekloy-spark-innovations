@@ -97,7 +97,7 @@ export default function CTA(){
             size="lg" 
             className="text-white border-white hover:bg-white/10 group transition-all duration-300 hover:scale-105"
           >
-            <a href="tel:+2348060000000" className="flex items-center">
+            <a href="tel:+2348143728843" className="flex items-center">
               <Phone size={18} className="mr-2 group-hover:animate-pulse" />
               <span>Call Directly</span>
             </a>

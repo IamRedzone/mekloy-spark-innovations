@@ -98,7 +98,7 @@ const SectorSection = () => {
               <div className="absolute inset-0 flex flex-col justify-end p-8">
                 <h3 className="text-3xl font-nexa font-bold text-white mb-3">{sector.title}</h3>
                 <p className="text-white/90 mb-6">{sector.description}</p>
-                <Button className="bg-white text-mekloy-blue hover:bg-mekloy-yellow w-fit transition-all">
+                <Button onClick={() => window.location.href = '/projects'}  className="bg-white text-mekloy-blue hover:bg-mekloy-yellow w-fit transition-all">
                   Explore Solutions
                   <ArrowRight size={16} className="ml-2" />
                 </Button>

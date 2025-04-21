@@ -162,11 +162,6 @@ const TestimonialsCarousel = () => {
                           "{testimonial.content}"
                         </p>
                         <div className="flex items-center">
-                          <img 
-                            src={testimonial.image} 
-                            alt={testimonial.name} 
-                            className="w-16 h-16 rounded-full object-cover border-2 border-mekloy-blue"
-                          />
                           <div className="ml-4">
                             <h4 className="text-lg font-bold text-mekloy-blue">{testimonial.name}</h4>
                             <p className="text-gray-600">{testimonial.role}</p>

@@ -30,9 +30,9 @@ const AboutUsSection = () => {
             <div className="relative">
               <div className="rounded-lg overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3" 
-                  alt="CEO of Mekloy" 
-                  className="w-full h-[400px] object-cover"
+                  src="/mekloy-CEO.jpg"
+                  alt="CEO of Mekloy"
+                  className="w-full h-[400px] object-[center_25%] object-cover"
                 />
               </div>
               <div className="absolute -bottom-6 -right-6 bg-mekloy-blue p-8 rounded-lg shadow-xl">
@@ -50,7 +50,7 @@ const AboutUsSection = () => {
                 Nigeria's future."
               </p>
               <div className="mt-4">
-                <p className="font-bold text-mekloy-blue">Dr. Sarah Johnson</p>
+                <p className="font-bold text-mekloy-blue">Mrs Lucy Okolie</p>
                 <p className="text-gray-500">Chief Executive Officer</p>
               </div>
             </div>
@@ -60,7 +60,7 @@ const AboutUsSection = () => {
             <h2 className="text-4xl font-bold text-mekloy-blue mb-6">Our Journey of Excellence</h2>
             <div className="space-y-6">
               <p className="text-gray-600 text-lg">
-                Founded in 2003, Mekloy Integrated Services emerged from a vision to transform Nigeria's 
+                Founded in 2004, Mekloy Integrated Services emerged from a vision to transform Nigeria's 
                 electrical infrastructure landscape. What began as a small electrical contracting firm has 
                 grown into one of the country's leading providers of comprehensive electrical solutions.
               </p>
@@ -78,7 +78,7 @@ const AboutUsSection = () => {
                 <Users className="text-mekloy-blue mb-4 h-8 w-8" />
                 <h3 className="text-xl font-bold mb-2">Our Team</h3>
                 <p className="text-gray-600">
-                  With over 150 skilled professionals, including certified engineers and technicians, 
+                  With over 50 skilled professionals, including certified engineers and technicians, 
                   we bring expertise and dedication to every project.
                 </p>
               </div>

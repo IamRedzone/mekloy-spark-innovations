@@ -102,7 +102,7 @@ const Hero = () => {
               onMouseLeave={() => setIsButtonHovered(false)}
             >
               <Link to="/contact" className="flex items-center">
-                Get A Quote
+                Get A Free Quote
                 <ArrowRight className={`ml-2 h-5 w-5 transition-transform duration-300 ${isButtonHovered ? 'translate-x-1' : ''}`} />
               </Link>
             </Button>
