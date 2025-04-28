@@ -11,7 +11,7 @@ const products = [
   {
     id: 1,
     title: 'Concrete Vibrated Electrical Poles',
-    description: 'High-quality, durable concrete poles for electrical power transmission and distribution.',
+    description: 'High-quality, durable concrete poles for electrical power transmission and distribution. We are the top concrete pole producers in Bayelsa state',
     image: 'round-poles.webp',
   },
   {

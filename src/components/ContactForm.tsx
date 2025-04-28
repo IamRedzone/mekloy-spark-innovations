@@ -153,7 +153,7 @@ const ContactForm = () => {
         </p>
         
         {/* Contact Info Section */}
-        <div className="space-y-6">
+        <div className="space-y-6 ">
           <div className="flex items-center space-x-4">
             <div className="w-12 h-12 rounded-full bg-mekloy-blue/10 flex items-center justify-center flex-shrink-0">
               <Phone className="h-5 w-5 text-mekloy-blue" />
@@ -161,9 +161,20 @@ const ContactForm = () => {
             <div>
               <h3 className="text-lg font-semibold text-mekloy-blue">Phone</h3>
               <a href="tel:+2348143728843" className="text-gray-700 hover:text-mekloy-blue">
-                +234 814 372 8843
+                08143728843
               </a>
             </div>
+            <div className="flex items-center space-x-4">
+            <div className="w-12 h-12 rounded-full bg-mekloy-blue/10 flex items-center justify-center flex-shrink-0">
+              <Phone className="h-5 w-5 text-mekloy-blue" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-mekloy-blue">Phone</h3>
+              <a href="tel:+2349130630996" className="text-gray-700 hover:text-mekloy-blue">
+                09130630996
+              </a>
+            </div>
+          </div>
           </div>
           
           <div className="flex items-center space-x-4">

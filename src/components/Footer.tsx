@@ -38,6 +38,12 @@ const Footer = () => {
                 </a>
               </div>
               <div className="flex items-center space-x-3 group hover:translate-x-1 transition-transform duration-300">
+                <Phone size={20} className="text-mekloy-deep-yellow group-hover:animate-pulse" />
+                <a href="tel:+2349130630996" className="text-gray-300 group-hover:text-white transition-colors">
+                +234 913 0630 996
+                </a>
+              </div>
+              <div className="flex items-center space-x-3 group hover:translate-x-1 transition-transform duration-300">
                 <Mail size={20} className="text-mekloy-deep-yellow group-hover:animate-pulse" />
                 <a href="mailto:info@mekloy.com" className="text-gray-300 group-hover:text-white transition-colors">
                   mekloyintegrated@gmail.com

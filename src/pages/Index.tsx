@@ -60,9 +60,10 @@ const AboutUsSection = () => {
             <h2 className="text-4xl font-bold text-mekloy-blue mb-6">Our Journey of Excellence</h2>
             <div className="space-y-6">
               <p className="text-gray-600 text-lg">
-                Founded in 2004, Mekloy Integrated Services emerged from a vision to transform Nigeria's 
-                electrical infrastructure landscape. What began as a small electrical contracting firm has 
-                grown into one of the country's leading providers of comprehensive electrical solutions.
+                Founded in 2004, Mekloy Integrated Services Company Limited is a leading electrical products manufacturer and supplier based in the heart of Bayelsa State, Nigeria.
+We specialize in producing high-quality vibrated concrete electrical poles, durable concrete cast products, and supplying a wide range of industrial, domestic decor, and solar electrical materials.
+Whether you need concrete utility poles, solar installation supplies, or decorative electrical fittings, Mekloy delivers trusted solutions for homes, businesses, and large-scale industrial projects across Nigeria.
+Contact us today for reliable electrical supplies and concrete products crafted to meet the highest standards.
               </p>
               
               <div className="bg-gray-50 p-6 rounded-lg">

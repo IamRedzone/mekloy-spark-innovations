@@ -96,7 +96,7 @@ const Navbar = () => {
 
         {/* Call Button - Fixed contrast issues */}
         <a 
-          href="tel:+2348143728843" 
+          href="tel:+2348035415874" 
           className={scrolled 
             ? "hidden md:flex items-center gap-2 text-white bg-mekloy-blue px-4 py-2 rounded-md hover:bg-mekloy-blue/90 font-medium transition-colors transform hover:scale-105" 
             : "hidden md:flex items-center gap-2 text-mekloy-blue bg-mekloy-yellow px-4 py-2 rounded-md hover:bg-amber-300 font-medium transition-all transform hover:scale-105"}
